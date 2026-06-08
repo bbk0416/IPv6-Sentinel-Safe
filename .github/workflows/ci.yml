@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Check requirements manifest
+        run: python scripts/check_requirements.py
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Check frontend syntax
+        run: node --check static/dashboard.js
+      - name: Run source and runtime preflight
+        run: |
+          python scripts/preflight_check.py
+          python scripts/preflight_check.py --strict
+      - name: Run contract and release checks
+        run: |
+          python scripts/check_api_contract.py
+          python scripts/check_schema_contract.py
+          python scripts/check_release_identity.py
+          python scripts/check_release_artifact.py
+          python scripts/check_file_inventory.py
+          python scripts/check_release_matrix.py
+          python scripts/check_route_hygiene.py
+          python scripts/check_manifest_hygiene.py
+          python scripts/check_validation_hygiene.py
+          python scripts/check_publication_hygiene.py
+          python scripts/check_gate_registry.py
+          python scripts/check_capability_boundary.py
+          python scripts/check_reviewer_handoff.py
+          python scripts/check_release_zip.py
+          python scripts/check_ci_workflow.py
+      - name: Run release audit
+        run: python scripts/release_audit.py
+      - name: Run final handoff gate
+        run: python scripts/final_handoff_check.py
+      - name: Run clean validation
+        run: |
+          # run_clean_validation.py runs the canonical clean validation gate and cleans generated artifacts.
+          python scripts/run_clean_validation.py
+      - name: Build Docker image
+        run: docker build -t ipv6-sentinel-safe:test .

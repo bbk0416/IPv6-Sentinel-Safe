@@ -1,0 +1,288 @@
+openapi: 3.0.3
+info:
+  title: IPv6 Sentinel Safe API
+  version: 27.0.0-safe
+  description: Local-only IPv6 security monitoring simulator API. All control endpoints operate on simulated local data only.
+servers:
+  - url: http://127.0.0.1:5000
+paths:
+  /api/health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: Application is reachable
+  /api/ready:
+    get:
+      summary: Readiness check
+      responses:
+        '200':
+          description: Ready for local safe simulation
+        '503':
+          description: Safety check failed
+  /api/info:
+    get:
+      summary: Application safety metadata
+      responses:
+        '200':
+          description: Safety flags and runtime configuration
+  /api/release:
+    get:
+      summary: Validate current release identity
+      description: Read-only check that current version declarations and handoff documents agree.
+      responses:
+        '200':
+          description: Release identity is consistent
+        '503':
+          description: Release identity drift detected
+
+  /api/manifest:
+    get:
+      summary: Validate project manifest hygiene
+      description: Read-only check that project_manifest.json release notes, docs, reviewer exports, API paths, and simulation boundary are consistent.
+      responses:
+        '200':
+          description: Manifest hygiene checks passed
+        '503':
+          description: Manifest drift detected
+
+  /api/publication:
+    get:
+      summary: Validate public-release hygiene
+      description: Read-only check for personal markers, private IPv4 addresses, user paths, stale release-note markers, and obvious credential patterns.
+      responses:
+        '200':
+          description: Publication hygiene checks passed
+        '503':
+          description: Publication hygiene checks failed
+
+  /api/gates:
+    get:
+      summary: Validate central quality-gate registry
+      description: Read-only check that reviewer-facing quality gates have matching scripts, documentation, endpoints, and manifest entries.
+      responses:
+        '200':
+          description: Gate registry checks passed
+        '503':
+          description: Gate registry drift detected
+
+  /api/capabilities:
+    get:
+      summary: Validate simulator capability boundary
+      description: Read-only check that supported capabilities and explicit non-capabilities are declared across source, docs, API, and manifest.
+      responses:
+        '200':
+          description: Capability boundary checks passed
+        '503':
+          description: Capability boundary drift detected
+
+  /api/reviewer:
+    get:
+      summary: Reviewer handoff summary
+      description: Read-only review entry point listing first-run commands, safe claims, explicit non-claims, and recommended demo flow.
+      responses:
+        '200':
+          description: Reviewer handoff checks passed
+        '503':
+          description: Reviewer handoff drift detected
+
+  /api/stats:
+    get:
+      summary: Dashboard statistics
+      responses:
+        '200':
+          description: Current simulated monitoring statistics
+  /api/assets:
+    get:
+      summary: Simulated assets
+      responses:
+        '200':
+          description: List of local sample assets
+  /api/assets/{asset_id}:
+    get:
+      summary: Simulated asset details
+      parameters:
+        - in: path
+          name: asset_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Asset details
+        '404':
+          description: Asset not found
+  /api/assets/generate:
+    post:
+      summary: Generate local sample asset inventory
+      responses:
+        '200':
+          description: Sample assets generated locally
+  /api/performance:
+    get:
+      summary: Local performance snapshot
+      responses:
+        '200':
+          description: CPU, memory, and counter-derived display metrics
+  /api/logs:
+    get:
+      summary: Recent observation logs
+      responses:
+        '200':
+          description: Recent logs
+  /api/logs/clear:
+    post:
+      summary: Clear local observation logs
+      responses:
+        '200':
+          description: Logs cleared
+  /api/logs.csv:
+    get:
+      summary: Export recent observation logs as CSV
+      responses:
+        '200':
+          description: CSV export
+  /api/snapshot.json:
+    get:
+      summary: Export full dashboard snapshot
+      responses:
+        '200':
+          description: JSON snapshot
+  /api/report.json:
+    get:
+      summary: Export reviewer-friendly portfolio report
+      responses:
+        '200':
+          description: JSON report describing safety posture, demo data, and limitations
+  /api/demo/scenario:
+    post:
+      summary: Seed deterministic portfolio demo scenario
+      responses:
+        '200':
+          description: Demo scenario was generated locally
+  /api/monitoring/start:
+    post:
+      summary: Start simulated monitoring through REST fallback
+      responses:
+        '200':
+          description: Simulated monitoring started
+  /api/monitoring/stop:
+    post:
+      summary: Stop simulated monitoring through REST fallback
+      responses:
+        '200':
+          description: Simulated monitoring stopped
+  /api/simulation/speed:
+    post:
+      summary: Update local simulation speed
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                speed:
+                  type: integer
+                  minimum: 1
+                  maximum: 10
+      responses:
+        '200':
+          description: Simulation speed updated
+  /api/reset:
+    post:
+      summary: Reset local simulation data
+      responses:
+        '200':
+          description: Simulation state reset
+  /api/settings:
+    get:
+      summary: Read dashboard settings
+      responses:
+        '200':
+          description: Settings payload
+    post:
+      summary: Save dashboard settings
+      responses:
+        '200':
+          description: Updated settings payload
+
+  /api/diagnostics:
+    get:
+      summary: Reviewer-facing safety diagnostics
+      responses:
+        '200':
+          description: Safety diagnostic status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  version:
+                    type: string
+                  mode:
+                    type: string
+                  checks:
+                    type: array
+                    items:
+                      type: object
+  /api/preflight:
+    get:
+      summary: Run local preflight checks
+      description: Read-only checks for safe-mode flags, dependency availability, bind/auth posture, CORS, and release review files.
+      responses:
+        '200':
+          description: Preflight checks passed
+        '503':
+          description: One or more blocking preflight checks failed
+
+
+  /api/quality:
+    get:
+      summary: Run release quality gate checks
+      description: Read-only package quality checks for version consistency, review files, simulation-only flags, and release artifact hygiene.
+      responses:
+        '200':
+          description: Quality gate passed
+        '503':
+          description: One or more blocking quality checks failed
+
+  /api/contract:
+    get:
+      summary: Validate API contract consistency
+      description: Read-only check that Flask API routes, OpenAPI paths, API reference, and project manifest agree.
+      responses:
+        '200':
+          description: API contract is consistent
+        '503':
+          description: One or more API contract checks failed
+
+  /api/schema:
+    get:
+      summary: Return reviewer-facing JSON data schemas
+      description: Describes the local simulator API payload shapes for stats, assets, logs, and settings. This is a documentation/validation aid only.
+      responses:
+        '200':
+          description: Schema contract payload
+
+  /api/integrity:
+    get:
+      summary: Validate deterministic release file inventory
+      description: Read-only check that the current clean source tree matches docs/release/FILE_INVENTORY.json.
+      responses:
+        '200':
+          description: File inventory matches current source tree
+        '503':
+          description: File inventory drift detected
+
+  /api/artifact:
+    get:
+      summary: Validate release artifact hygiene
+      description: Read-only check that the source package excludes runtime artifacts and includes required release handoff files.
+      responses:
+        '200':
+          description: Release artifact hygiene checks passed
+        '503':
+          description: One or more release artifact hygiene checks failed

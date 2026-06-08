@@ -1,0 +1,50 @@
+[project]
+name = "ipv6-sentinel-safe"
+version = "27.0.0"
+description = "Safe IPv6 security monitoring simulator for education and portfolio demos."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "IPv6 Sentinel Safe Maintainers" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Framework :: Flask",
+  "Intended Audience :: Education",
+  "Topic :: Security",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+  "Flask>=2.3,<4",
+  "Flask-SocketIO>=5.3,<6",
+  "python-socketio>=5.8,<6",
+  "python-engineio>=4.7,<5",
+  "Werkzeug>=2.3,<4",
+  "psutil>=5.9,<8",
+  "python-dotenv>=1.0,<2",
+]
+
+[tool.setuptools]
+py-modules = ["app", "settings"]
+packages = ["models", "utils", "services"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.6,<1",
+  "mypy>=1.10,<2",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_unused_ignores = true

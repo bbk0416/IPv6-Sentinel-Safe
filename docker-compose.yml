@@ -1,0 +1,17 @@
+services:
+  ipv6-sentinel-safe:
+    build: .
+    container_name: ipv6-sentinel-safe
+    environment:
+      IPV6_SENTINEL_HOST: 0.0.0.0
+      IPV6_SENTINEL_PORT: 5000
+      IPV6_SENTINEL_WEB_AUTH_ENABLED: "1"
+      IPV6_SENTINEL_USERNAME: ${IPV6_SENTINEL_USERNAME:-admin}
+      IPV6_SENTINEL_PASSWORD: ${IPV6_SENTINEL_PASSWORD:?Set IPV6_SENTINEL_PASSWORD before running docker compose}
+      IPV6_SENTINEL_CORS: ${IPV6_SENTINEL_CORS:-http://127.0.0.1:5000,http://localhost:5000}
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped

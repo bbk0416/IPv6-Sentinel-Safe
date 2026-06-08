@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="620" viewBox="0 0 1080 620" role="img" aria-labelledby="title desc">
+  <title id="title">IPv6 Sentinel Safe dashboard preview</title>
+  <desc id="desc">Static preview illustration of a safe IPv6 monitoring simulator dashboard.</desc>
+  <rect width="1080" height="620" rx="26" fill="#101827"/>
+  <rect x="34" y="30" width="1012" height="74" rx="18" fill="#172235"/>
+  <text x="64" y="78" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#f8fafc">IPv6 Sentinel Safe</text>
+  <text x="838" y="76" font-family="Arial, sans-serif" font-size="18" fill="#94a3b8">safe simulation</text>
+  <g fill="#1f2f46">
+    <rect x="34" y="128" width="236" height="128" rx="18"/>
+    <rect x="292" y="128" width="236" height="128" rx="18"/>
+    <rect x="550" y="128" width="236" height="128" rx="18"/>
+    <rect x="808" y="128" width="238" height="128" rx="18"/>
+  </g>
+  <g font-family="Arial, sans-serif">
+    <text x="58" y="164" font-size="16" fill="#94a3b8">Total events</text><text x="58" y="218" font-size="46" font-weight="700" fill="#f8fafc">128</text>
+    <text x="316" y="164" font-size="16" fill="#94a3b8">Assets</text><text x="316" y="218" font-size="46" font-weight="700" fill="#f8fafc">5</text>
+    <text x="574" y="164" font-size="16" fill="#94a3b8">Suspicious</text><text x="574" y="218" font-size="46" font-weight="700" fill="#f8fafc">7</text>
+    <text x="832" y="164" font-size="16" fill="#94a3b8">Safety score</text><text x="832" y="218" font-size="46" font-weight="700" fill="#f8fafc">92</text>
+  </g>
+  <rect x="34" y="284" width="500" height="300" rx="18" fill="#172235"/>
+  <rect x="558" y="284" width="488" height="300" rx="18" fill="#172235"/>
+  <text x="64" y="326" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#f8fafc">Observed assets</text>
+  <text x="588" y="326" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#f8fafc">Monitoring log</text>
+  <g font-family="Arial, sans-serif" font-size="17" fill="#cbd5e1">
+    <text x="66" y="374">lab-client-01 · fe80::211 · LOW</text>
+    <text x="66" y="420">lab-printer · fe80::233 · MEDIUM</text>
+    <text x="66" y="466">lab-router · fe80::255 · HIGH</text>
+    <text x="588" y="374">DHCPv6 request observed</text>
+    <text x="588" y="420">Router Advertisement observed</text>
+    <text x="588" y="466">Policy response simulated</text>
+    <text x="588" y="512">Snapshot exported safely</text>
+  </g>
+</svg>
