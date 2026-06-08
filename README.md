@@ -2,17 +2,31 @@
 
 **IPv6 Sentinel Safe**는 실제 네트워크를 스캔하거나 패킷을 송수신하지 않는 **안전한 로컬 IPv6 보안 이벤트 시뮬레이터**입니다.
 
-이 프로젝트는 포트폴리오, 교육, 시연을 목적으로 합니다. 실제 IDS/IPS, 패킷 분석기, 네트워크 스캐너, 차단 자동화 도구가 아닙니다.
+포트폴리오, 교육, 시연을 위해 만든 프로젝트입니다. 실제 IDS/IPS, 패킷 분석기, 네트워크 스캐너, 차단 자동화 도구가 아닙니다.
 
-## 핵심 요약
+## 한눈에 보기
 
-- 버전: **27.0.0-safe / v27**
-- 모드: `safe_simulation`
-- 실행 방식: 로컬 Flask + Socket.IO 대시보드
-- 현재 v27 대시보드: 로컬 샘플 데이터 기반 시각화
-- 기본 주소: `http://127.0.0.1:5000`
-- 검증 결과: Windows PowerShell 기준 전체 검증 및 전체 테스트 통과
-- 안전 범위: 실제 패킷 캡처 없음, 실제 패킷 전송 없음, 실제 네트워크 스캔 없음
+| 항목 | 내용 |
+|---|---|
+| 버전 | **27.0.0-safe / v27** |
+| 패키지 버전 | `27.0.0` — normalized PEP 440 package version |
+| 모드 | `safe_simulation` |
+| 실행 방식 | 로컬 Flask + Socket.IO 대시보드 |
+| 기본 주소 | `http://127.0.0.1:5000` |
+| 현재 v27 대시보드 | 로컬 샘플 데이터 기반 시각화 |
+| 검증 상태 | Windows PowerShell 기준 전체 검증 및 전체 테스트 통과 |
+| 안전 범위 | 실제 패킷 캡처 없음, 실제 패킷 전송 없음, 실제 네트워크 스캔 없음 |
+
+## 이 프로젝트의 목적
+
+이 프로젝트는 “실제 공격/탐지 도구”가 아니라, **보안 이벤트 대응 흐름을 안전하게 보여주는 데모 환경**입니다.
+
+주요 목표는 다음과 같습니다.
+
+- IPv6 보안 이벤트를 로컬 샘플 데이터로 시각화
+- 대시보드, API, 문서, 테스트, 릴리스 검증을 하나의 패키지로 구성
+- public 포트폴리오에서 안전 범위와 한계를 명확히 제시
+- Windows 환경에서도 동일하게 검증되는 제출용 프로젝트 구성
 
 ## 주요 기능
 
@@ -24,7 +38,7 @@
 - 로컬 샘플 자산 생성 및 자산 상세 모달
 - 관측 로그, 통계, 안전 점수 표시
 - CSV 로그 내보내기 및 JSON 스냅샷 내보내기
-- API 계약, 스키마, 릴리스 품질 게이트 포함
+- API 계약, 응답 스키마, 릴리스 품질 게이트 포함
 - 파일 인벤토리 무결성 검증 포함
 - Windows/macOS/Linux 실행 스크립트 포함
 - Docker / Docker Compose 실행 지원
@@ -35,6 +49,7 @@
 
 ```txt
 docs/assets/dashboard-preview.svg
+docs/assets/dashboard-preview.png
 ```
 
 ## 빠른 실행
@@ -84,7 +99,7 @@ Docker Compose는 외부 포트 노출을 전제로 하므로 기본 인증 비�
 IPV6_SENTINEL_PASSWORD=change-me-local-demo docker compose up --build
 ```
 
-직접 빌드하려면:
+직접 빌드하려면 아래 명령을 사용합니다.
 
 ```bash
 docker build -t ipv6-sentinel-safe:latest .
@@ -98,7 +113,7 @@ docker run --rm -p 5000:5000 \
 
 ## v27 검증 기준
 
-가장 먼저 아래 명령을 실행하면 됩니다.
+가장 먼저 아래 명령을 실행합니다.
 
 ```powershell
 python scripts/run_clean_validation.py
@@ -116,7 +131,7 @@ python scripts/check_requirements.py
 python scripts/run_full_tests.py
 ```
 
-Windows PowerShell 검증 기준:
+Windows PowerShell 검증 기준은 다음과 같습니다.
 
 ```txt
 file inventory: pass
@@ -190,16 +205,26 @@ python scripts/final_handoff_check.py --plan
 
 > IPv6 Sentinel Safe는 실제 네트워크를 스캔하거나 패킷을 송수신하지 않는 안전한 로컬 IPv6 보안 이벤트 시뮬레이터입니다. Flask/Socket.IO 기반 대시보드, IPv6 보안 이벤트 시나리오, API 계약, 파일 인벤토리 무결성 검증, 릴리스 품질 게이트, Windows 검증까지 포함한 포트폴리오용 보안 시뮬레이션 프로젝트입니다.
 
-## 문서
+## 문서 구조
 
-- `PORTFOLIO_SUMMARY.md`: 포트폴리오용 요약
-- `PROJECT_COMPLETION_REPORT.md`: 완성 보고서
-- `VALIDATION_REPORT.md`: 검증 결과 요약
-- `RELEASE_NOTES_v27.md`: 현재 최종 릴리스 노트
-- `docs/review/HONEST_LIMITATIONS.md`: 한계와 비기능 범위
-- `docs/quality/CAPABILITY_BOUNDARY.md`: 지원 범위와 비지원 범위
-- `docs/quality/VALIDATION_HYGIENE.md`: validation_hygiene 검증 흐름
-- `docs/release/FILE_INVENTORY.json`: 파일 인벤토리 무결성 기준
+| 문서 | 설명 |
+|---|---|
+| `PORTFOLIO_SUMMARY.md` | 포트폴리오용 요약 |
+| `PROJECT_COMPLETION_REPORT.md` | 완성 보고서 |
+| `VALIDATION_REPORT.md` | 검증 결과 요약 |
+| `RELEASE_NOTES_v27.md` | 현재 최종 릴리스 노트 |
+| `docs/review/HONEST_LIMITATIONS.md` | 한계와 비기능 범위 |
+| `docs/quality/CAPABILITY_BOUNDARY.md` | 지원 범위와 비지원 범위 |
+| `docs/quality/VALIDATION_HYGIENE.md` | validation_hygiene 검증 흐름 |
+| `docs/release/FILE_INVENTORY.json` | 파일 인벤토리 무결성 기준 |
+
+## 제출 시 요약
+
+```txt
+Safe local IPv6 security-event simulator.
+No packet capture, no packet sending, no network scanning.
+Windows-verified validation and 158-test discovery pass.
+```
 
 ## 라이선스
 

@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file.",
   "file_count": 138,
-  "package_sha256": "1a567f4d829922e365b90cb881ad213ab519c6686fe872f89c6170280f091fd1",
+  "package_sha256": "af1fdcedf91825c50347d21b48dd8224eae7cab342a600fcfb44a593c0acae37",
   "files": [
     {
       "path": ".dockerignore",
@@ -69,8 +69,8 @@
     },
     {
       "path": "README.md",
-      "size": 7293,
-      "sha256": "7cb659cd8fd54bc59885c9c252d93078b9222744ad8ef65227d56666007fd89c"
+      "size": 8299,
+      "sha256": "b847184ebcfc34e4e48cec063fe6305eec2f44e27b76a7c6c6e76af72f5852b1"
     },
     {
       "path": "RELEASE_NOTES_v27.md",
