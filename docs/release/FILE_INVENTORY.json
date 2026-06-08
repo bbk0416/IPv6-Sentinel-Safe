@@ -3,9 +3,9 @@
   "version": "27.0.0-safe",
   "mode": "safe_simulation",
   "generated_by": "scripts/check_file_inventory.py --write",
-  "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file.",
+  "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 139,
-  "package_sha256": "774b023ec3b72df2d87cf87f31b19dcd9629f955a1771bbd38624c86ab800ccd",
+  "package_sha256": "17e570b0abc572a538d22694bf70e6bce8eefaa0a2dc77340b3d67179dc07995",
   "files": [
     {
       "path": ".dockerignore",
@@ -79,8 +79,8 @@
     },
     {
       "path": "RELEASE_NOTES_v27.md",
-      "size": 37668,
-      "sha256": "681d8f514a4e62790adafdcb01c577444bfee6e45fd50304b2466762dd4e3b5e"
+      "size": 37986,
+      "sha256": "bb1fd8033ae39ced0a358f5e977f872825d4df5029c2e9f3d998e44c9ac5e33f"
     },
     {
       "path": "SAFE_PATCH_NOTES.md",
@@ -99,8 +99,8 @@
     },
     {
       "path": "VALIDATION_REPORT.md",
-      "size": 48604,
-      "sha256": "0f3176e43cad121a32d35a614f8824ea6207afd37702f37e2558fd36c7f3fcd5"
+      "size": 48815,
+      "sha256": "d2f89d92d4db815ebfa5b861487e6d29fe1f092fffa1e5fa18e07de39e7989b7"
     },
     {
       "path": "app.py",
@@ -179,8 +179,8 @@
     },
     {
       "path": "docs/quality/FILE_INVENTORY.md",
-      "size": 903,
-      "sha256": "cdd8302bcebc3f8100f057f48c20921949b215fb0f6adfde151c0681a5468473"
+      "size": 1180,
+      "sha256": "dc96605f8f1239d150063962aeef92f06269c6eb6df9d8654331eafc47c86cfc"
     },
     {
       "path": "docs/quality/FINAL_HANDOFF.md",
@@ -469,8 +469,8 @@
     },
     {
       "path": "services/file_inventory.py",
-      "size": 6097,
-      "sha256": "c2c2046f649fa541a56fc99dada59c8d4051acd91972eda46b134eb8a5fbcda4"
+      "size": 6881,
+      "sha256": "273ec749f1ac2aa20ea96b33a4931dbbb5da92f41953adb01235377ba705bbbb"
     },
     {
       "path": "services/gate_registry.py",

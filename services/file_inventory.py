@@ -78,19 +78,38 @@ def iter_candidate_files(root: Path) -> list[Path]:
                 files.append(path)
     return sorted(files, key=lambda path: _inventory_sort_key(path, root))
 
+def _normalized_inventory_bytes(path: Path) -> bytes:
+    """Return bytes used for cross-platform inventory hashing.
+
+    Git can check text files out with LF or CRLF depending on the reviewer
+    environment and attributes.  The release inventory is intended to detect
+    meaningful source changes, not platform line-ending conversion.  Text files
+    are therefore hashed after normalizing CRLF/CR to LF.  Binary files are
+    hashed exactly as stored on disk.
+    """
+    data = path.read_bytes()
+    if b"\x00" in data:
+        return data
+    try:
+        data.decode("utf-8")
+    except UnicodeDecodeError:
+        return data
+    return data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+
+
 def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return hashlib.sha256(_normalized_inventory_bytes(path)).hexdigest()
+
+
+def inventory_size(path: Path) -> int:
+    return len(_normalized_inventory_bytes(path))
 
 
 def build_file_inventory(root: Path, *, version: str = CURRENT_VERSION) -> dict[str, Any]:
     files: list[dict[str, Any]] = []
     for path in iter_candidate_files(root):
         rel = path.relative_to(root).as_posix()
-        files.append({"path": rel, "size": path.stat().st_size, "sha256": sha256_file(path)})
+        files.append({"path": rel, "size": inventory_size(path), "sha256": sha256_file(path)})
     package_digest = hashlib.sha256(
         "\n".join(f"{item['sha256']}  {item['path']}" for item in files).encode("utf-8")
     ).hexdigest()
@@ -99,7 +118,7 @@ def build_file_inventory(root: Path, *, version: str = CURRENT_VERSION) -> dict[
         "version": version,
         "mode": "safe_simulation",
         "generated_by": "scripts/check_file_inventory.py --write",
-        "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file.",
+        "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
         "file_count": len(files),
         "package_sha256": package_digest,
         "files": files,

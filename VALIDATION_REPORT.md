@@ -652,3 +652,7 @@ After this DOCREVIEW pass, the runtime-dependency-installed full sweep observed 
 ## Windows validation process-control hardening
 
 A final Windows-focused reviewer pass replaced runner-local POSIX-only timeout cleanup with the shared `services/process_control.py` helper. `validate_project.py`, `run_clean_validation.py`, `run_full_tests.py`, and the unittest process helper now call portable subprocess-isolation and timeout-cleanup functions. POSIX still uses a new child session; Windows uses `CREATE_NEW_PROCESS_GROUP` when available and then terminate/kill fallback cleanup on timeout. This only hardens reviewer validation commands and does not change the safe local simulation boundary.
+
+## Fresh clone note
+
+File inventory validation uses LF-normalized text hashing so a clean Git clone on Windows/macOS/Linux should produce the same inventory digest when the file content is otherwise unchanged.

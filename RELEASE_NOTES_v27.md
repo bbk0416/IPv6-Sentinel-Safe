@@ -426,3 +426,9 @@ A final Windows reviewer pass moved validation timeout cleanup into `services/pr
 A final Windows handoff fix made file-inventory and release-ZIP ordering explicitly platform-stable by sorting on normalized POSIX-style relative paths instead of OS-specific `Path` ordering. This prevents identical extracted source trees from producing different aggregate inventory digests on Windows versus Linux/macOS.
 
 This is packaging/integrity hygiene only. It does not add packet capture, packet sending, network scanning, spoofing, MITM, IDS, IPS, or production monitoring capability.
+
+## Fresh-clone inventory normalization
+
+- File inventory hashing now normalizes text-file line endings to LF before computing per-file and package digests.
+- This prevents Windows fresh clones from failing integrity checks only because Git checked text files out with CRLF.
+- Binary files remain hashed as raw bytes.

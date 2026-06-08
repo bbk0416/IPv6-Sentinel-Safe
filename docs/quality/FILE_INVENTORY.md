@@ -26,3 +26,7 @@ python scripts/check_file_inventory.py --write  # maintainers only, before relea
 ```
 
 If you edit any tracked project file, refresh the inventory before packaging.
+
+## Cross-platform line endings
+
+The file inventory hashes text files after normalizing CRLF/CR line endings to LF. This keeps fresh-clone validation stable across Windows, macOS, and Linux while still detecting meaningful source changes. Binary files are hashed as raw bytes.
