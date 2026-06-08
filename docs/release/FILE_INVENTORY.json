@@ -4,8 +4,8 @@
   "mode": "safe_simulation",
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file.",
-  "file_count": 138,
-  "package_sha256": "af1fdcedf91825c50347d21b48dd8224eae7cab342a600fcfb44a593c0acae37",
+  "file_count": 139,
+  "package_sha256": "774b023ec3b72df2d87cf87f31b19dcd9629f955a1771bbd38624c86ab800ccd",
   "files": [
     {
       "path": ".dockerignore",
@@ -16,6 +16,11 @@
       "path": ".env.example",
       "size": 1020,
       "sha256": "e6386e500a0d5ea41f31e78f836bd910f249c1343091706bbb06af47abb8018d"
+    },
+    {
+      "path": ".gitattributes",
+      "size": 231,
+      "sha256": "341f444e0a4b99ea1c2829de84b033010226c29d6f532f3e257001fbb7145f0f"
     },
     {
       "path": ".github/workflows/ci.yml",
