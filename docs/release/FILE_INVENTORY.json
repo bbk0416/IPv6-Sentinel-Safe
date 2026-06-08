@@ -4,8 +4,8 @@
   "mode": "safe_simulation",
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file.",
-  "file_count": 162,
-  "package_sha256": "468ba97d1149b316c12a0aa45c95b2bcb912c2434a9e49a4dff469d9d5a243ac",
+  "file_count": 138,
+  "package_sha256": "1a567f4d829922e365b90cb881ad213ab519c6686fe872f89c6170280f091fd1",
   "files": [
     {
       "path": ".dockerignore",
@@ -69,133 +69,13 @@
     },
     {
       "path": "README.md",
-      "size": 20149,
-      "sha256": "f7a7ab5124cae4713f183e742dedb1c6e855ed599d03ced19db3952e6c88deae"
-    },
-    {
-      "path": "RELEASE_NOTES_v10.md",
-      "size": 959,
-      "sha256": "6c021d551d2fbfd507cf827668a44983df02969412d5df3964bf7b0aab03f302"
-    },
-    {
-      "path": "RELEASE_NOTES_v11.md",
-      "size": 943,
-      "sha256": "7e5fbed0f818c75968e75f13e8a74da58d771bb83d70da30997db634eed0a361"
-    },
-    {
-      "path": "RELEASE_NOTES_v12.md",
-      "size": 1063,
-      "sha256": "75c370757082ab9d1a682e5b06c08bc5f8a1eb204661cf057acee24ee759338c"
-    },
-    {
-      "path": "RELEASE_NOTES_v13.md",
-      "size": 895,
-      "sha256": "8d66abb4a227d12481cc796814a84401bede182f18386e94f2ac3becb30b208e"
-    },
-    {
-      "path": "RELEASE_NOTES_v14.md",
-      "size": 680,
-      "sha256": "cf84c0c77b6957400b4cfb25150c6b069db8fc79f006af83682fedfc8237362d"
-    },
-    {
-      "path": "RELEASE_NOTES_v15.md",
-      "size": 674,
-      "sha256": "5acc768ccf072f53b3478f62573261982d45620aadafcd5b384a926d5060f242"
-    },
-    {
-      "path": "RELEASE_NOTES_v16.md",
-      "size": 707,
-      "sha256": "65bbe4a024444d9a7c9126b4f6d82cfd72083f997e5a1dadfb475ba76dd3b4e6"
-    },
-    {
-      "path": "RELEASE_NOTES_v17.md",
-      "size": 870,
-      "sha256": "3597d95b352825a194e9e9cc3ad0fe6ebffb99f5cc07f775c7e0a1a4cd17c2b6"
-    },
-    {
-      "path": "RELEASE_NOTES_v18.md",
-      "size": 934,
-      "sha256": "410e470454c4ea1ca3d6afe5e700353453e6521c5790f62b51943f6eed00806d"
-    },
-    {
-      "path": "RELEASE_NOTES_v19.md",
-      "size": 908,
-      "sha256": "ccc14dada0b63cf03d22773083629f1a1feef96735f64794767cd27809015c3b"
-    },
-    {
-      "path": "RELEASE_NOTES_v20.md",
-      "size": 649,
-      "sha256": "ce347601b02420b1c43bda51552716f11e2791e88efd19648340800f39cf21f3"
-    },
-    {
-      "path": "RELEASE_NOTES_v21.md",
-      "size": 727,
-      "sha256": "8e144ea4426936d5ae59df530d0d63803fd1082b1b4400c4d1c5916d8c4c6e8d"
-    },
-    {
-      "path": "RELEASE_NOTES_v22.md",
-      "size": 909,
-      "sha256": "f5d023de2476911fdf004179a158ba6651ab805df7df04cce1fd41acdc84befa"
-    },
-    {
-      "path": "RELEASE_NOTES_v23.md",
-      "size": 1149,
-      "sha256": "a394fcd7dcef5699a8a34018aca07832bdbc8cf5af10c8ddf258cf89a32be8bb"
-    },
-    {
-      "path": "RELEASE_NOTES_v24.md",
-      "size": 997,
-      "sha256": "b336053619d901ad83525b4254706aac70fa7ce89f05f082a06dd4b31e242192"
-    },
-    {
-      "path": "RELEASE_NOTES_v25.md",
-      "size": 891,
-      "sha256": "98a62541215c258e6bd077847afa215db8910adcfadd0ffddcdd781ef3e2a1e4"
-    },
-    {
-      "path": "RELEASE_NOTES_v26.md",
-      "size": 755,
-      "sha256": "9b6042231b8e167c421a93f932859e71d06ab9e8f316d188458fc9be11f6a5fa"
+      "size": 7293,
+      "sha256": "7cb659cd8fd54bc59885c9c252d93078b9222744ad8ef65227d56666007fd89c"
     },
     {
       "path": "RELEASE_NOTES_v27.md",
-      "size": 37819,
-      "sha256": "1413b7ae497ad0e98888b5fcedc49776764bef36d383cf4b2a00fc63164ce6da"
-    },
-    {
-      "path": "RELEASE_NOTES_v3.md",
-      "size": 1067,
-      "sha256": "fdb4d16038a0ff815e4c2df7b29e315d02c99b79a1aa6899eaf19a42403cc747"
-    },
-    {
-      "path": "RELEASE_NOTES_v4.md",
-      "size": 1315,
-      "sha256": "2c5270e205ee5fd31f24d0bfa7bf667a486cd67f629edec2d22b0be0f9c18678"
-    },
-    {
-      "path": "RELEASE_NOTES_v5.md",
-      "size": 758,
-      "sha256": "98ab17c5ddcd92b7252f0ddfac035c65d8b777115cad3e9bd8714cab24270f09"
-    },
-    {
-      "path": "RELEASE_NOTES_v6.md",
-      "size": 552,
-      "sha256": "03bcdd6c4d844a57b4bd329f75297c0d43175904ac30cbcee9e961cd0fd7e0a4"
-    },
-    {
-      "path": "RELEASE_NOTES_v7.md",
-      "size": 993,
-      "sha256": "79c68599dddc7b709576bbc702bed114b5b9633bd48fd9ae46c4e77d68b11c7c"
-    },
-    {
-      "path": "RELEASE_NOTES_v8.md",
-      "size": 747,
-      "sha256": "a183e570d693e98477b77db08fcaea833c92e6a6531d1457190909a7dbc7de94"
-    },
-    {
-      "path": "RELEASE_NOTES_v9.md",
-      "size": 1188,
-      "sha256": "19bae7ac446c2dcbb53d546adb8d09c5fa4e7aba2160736a94149e6c3a1462ab"
+      "size": 37668,
+      "sha256": "681d8f514a4e62790adafdcb01c577444bfee6e45fd50304b2466762dd4e3b5e"
     },
     {
       "path": "SAFE_PATCH_NOTES.md",
@@ -214,8 +94,8 @@
     },
     {
       "path": "VALIDATION_REPORT.md",
-      "size": 48608,
-      "sha256": "6868f598b827769b2547fa2d92ceac106de71621866ec375320dfef5a8b05677"
+      "size": 48604,
+      "sha256": "0f3176e43cad121a32d35a614f8824ea6207afd37702f37e2558fd36c7f3fcd5"
     },
     {
       "path": "app.py",
@@ -369,8 +249,8 @@
     },
     {
       "path": "docs/release/RELEASE_PACKAGE_MANIFEST.md",
-      "size": 4919,
-      "sha256": "27d83a475423aebf3620ad3a0c7398efc595bc5a7004c2eec2daa44986f4cd6c"
+      "size": 5085,
+      "sha256": "d5875129ce3d5c05b610a5fd5f11609d06e9d462d56e0783f3c0ecdd45068645"
     },
     {
       "path": "docs/review/FINAL_REVIEW_CHECKLIST.md",
@@ -399,8 +279,8 @@
     },
     {
       "path": "project_manifest.json",
-      "size": 6915,
-      "sha256": "279711c2482aff162ae3a6b338848c051f20167c7ef432db7e358b90938a2c8c"
+      "size": 6250,
+      "sha256": "8f0e180bf27ce4c831ef83e65debbece5d8de626003b99dfee2167287b28e37a"
     },
     {
       "path": "pyproject.toml",
@@ -554,8 +434,8 @@
     },
     {
       "path": "scripts/validate_project.py",
-      "size": 22086,
-      "sha256": "3b8804d35c734b65c18472c41defc489d7276d26ec829f2a0444e349f40c75c3"
+      "size": 21949,
+      "sha256": "175ba6440cfcb420144ccbc61beac036f12f50fac4dea2e2057826eaefbf3a00"
     },
     {
       "path": "services/__init__.py",
@@ -704,8 +584,8 @@
     },
     {
       "path": "tests/test_packaging.py",
-      "size": 7074,
-      "sha256": "34a55b10c2b6378e1acb35beacc22033a34ee46722c815a060bf54c4100c5ff7"
+      "size": 6862,
+      "sha256": "b38084722773c2a2168598048e92ef760b33e9764068ca4393763dbe29dfc0f7"
     },
     {
       "path": "tests/test_static_safety.py",
@@ -714,13 +594,13 @@
     },
     {
       "path": "tests/test_v11_quality.py",
-      "size": 3056,
-      "sha256": "7b816db447df347e27918f0df671deaa02d6bfa07101c2c672a178d38b7d7e73"
+      "size": 3020,
+      "sha256": "8a83abd3dc422b115d0412940d9e1ce22880fc516ecdc3bbdfb02a929649a17a"
     },
     {
       "path": "tests/test_v11_quality_gate.py",
-      "size": 1649,
-      "sha256": "7e6075808cbca8a015adc9fb7e2cb10aada2ff3ab685ebc380df818d13897ef1"
+      "size": 1613,
+      "sha256": "d849df12f1a66af9285d2ce8193d0e15d42aa32cd2238a0319ec72442393a346"
     },
     {
       "path": "tests/test_v12_validation.py",
@@ -749,8 +629,8 @@
     },
     {
       "path": "tests/test_v17_release_zip.py",
-      "size": 4875,
-      "sha256": "937ec8eff31ed28e871eedf98adab9d0df3360c75229704d53de8d3ff5c5b9ed"
+      "size": 4880,
+      "sha256": "c82908756d624446c57b82c7a0f7b8ea9eddf685f0bb7095313b3d17c662a08a"
     },
     {
       "path": "tests/test_v19_file_inventory.py",

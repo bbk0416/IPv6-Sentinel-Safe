@@ -18,7 +18,6 @@ class V11QualityGatePackagingTests(unittest.TestCase):
             "services/quality_gate.py",
             "scripts/release_audit.py",
             "docs/quality/QUALITY_GATE.md",
-            "RELEASE_NOTES_v11.md",
         ]:
             with self.subTest(path=path):
                 self.assertTrue((ROOT / path).exists(), path)

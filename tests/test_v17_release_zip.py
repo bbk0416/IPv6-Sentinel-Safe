@@ -105,5 +105,5 @@ class V17ReleaseZipTests(unittest.TestCase):
         manifest = json.loads((ROOT / "project_manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["version"], "27.0.0-safe")
         self.assertEqual(manifest["release_notes"].count("RELEASE_NOTES_v27.md"), 1)
-        self.assertIn("RELEASE_NOTES_v17.md", manifest["release_notes"])
+        self.assertEqual(manifest["release_notes"], ["RELEASE_NOTES_v27.md"])
         self.assertIn("docs/quality/RELEASE_ZIP.md", manifest["included_final_docs"])

@@ -27,7 +27,6 @@ else:
 class V11QualityPackagingTests(unittest.TestCase):
     def test_v11_preflight_release_files_exist(self) -> None:
         for path in [
-            "RELEASE_NOTES_v11.md",
             "services/preflight.py",
             "scripts/preflight_check.py",
             "docs/operations/PREFLIGHT.md",

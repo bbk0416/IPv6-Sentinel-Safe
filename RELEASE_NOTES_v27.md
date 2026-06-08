@@ -159,7 +159,7 @@ This is release-packaging hygiene only. It does not add packet capture, packet s
 
 ## v27 final versioned-test release-note reference lock
 
-A final reviewer-facing test hygiene pass removed historical release-note reference drift from versioned test modules. The v11 quality tests now reference `RELEASE_NOTES_v11.md`, and the v17 release-ZIP test now references `RELEASE_NOTES_v17.md` instead of unrelated historical notes. A static regression test now prevents `test_vN_*` modules from pointing at unrelated `RELEASE_NOTES_vM.md` files except the current v27 note.
+A final reviewer-facing cleanup removed historical root release-note files before v27 from the public handoff. Versioned tests now validate the current release-note manifest instead of requiring old root-level notes, keeping the GitHub file list focused on the final package.
 
 This is test/readability hygiene only. It does not add packet capture, packet sending, scanning, spoofing, MITM, IDS, IPS, or production monitoring capability.
 

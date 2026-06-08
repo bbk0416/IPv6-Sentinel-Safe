@@ -318,9 +318,9 @@ A final review found that a few versioned test modules still referenced unrelate
 
 Fixes applied:
 
-- `test_v11_quality.py` now checks `RELEASE_NOTES_v11.md` instead of `RELEASE_NOTES_v13.md`.
-- `test_v11_quality_gate.py` now checks `RELEASE_NOTES_v11.md` instead of `RELEASE_NOTES_v13.md`.
-- `test_v17_release_zip.py` now checks `RELEASE_NOTES_v17.md` instead of `RELEASE_NOTES_v16.md` for its historical release-note assertion.
+- `test_v11_quality.py` now validates preflight files without requiring historical root release notes.
+- `test_v11_quality_gate.py` now validates quality-gate files without requiring historical root release notes.
+- `test_v17_release_zip.py` now checks that the manifest exposes only the current `RELEASE_NOTES_v27.md` entry.
 - `tests/test_static_safety.py` now rejects unrelated `RELEASE_NOTES_vM.md` references inside `test_vN_*` modules, while still allowing the current `RELEASE_NOTES_v27.md` reference where appropriate.
 
 Validation commands run after this pass:

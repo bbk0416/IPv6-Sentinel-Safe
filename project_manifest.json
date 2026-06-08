@@ -156,30 +156,6 @@
     "optional full-test runner with process-group timeout cleanup"
   ],
   "release_notes": [
-    "RELEASE_NOTES_v27.md",
-    "RELEASE_NOTES_v26.md",
-    "RELEASE_NOTES_v25.md",
-    "RELEASE_NOTES_v24.md",
-    "RELEASE_NOTES_v23.md",
-    "RELEASE_NOTES_v22.md",
-    "RELEASE_NOTES_v21.md",
-    "RELEASE_NOTES_v20.md",
-    "RELEASE_NOTES_v19.md",
-    "RELEASE_NOTES_v18.md",
-    "RELEASE_NOTES_v17.md",
-    "RELEASE_NOTES_v16.md",
-    "RELEASE_NOTES_v15.md",
-    "RELEASE_NOTES_v14.md",
-    "RELEASE_NOTES_v13.md",
-    "RELEASE_NOTES_v12.md",
-    "RELEASE_NOTES_v11.md",
-    "RELEASE_NOTES_v10.md",
-    "RELEASE_NOTES_v9.md",
-    "RELEASE_NOTES_v8.md",
-    "RELEASE_NOTES_v7.md",
-    "RELEASE_NOTES_v6.md",
-    "RELEASE_NOTES_v5.md",
-    "RELEASE_NOTES_v4.md",
-    "RELEASE_NOTES_v3.md"
+    "RELEASE_NOTES_v27.md"
   ]
 }

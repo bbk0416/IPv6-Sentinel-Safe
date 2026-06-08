@@ -21,10 +21,6 @@ class PackagingTests(unittest.TestCase):
             "scripts/validate_project.py",
             "DEPLOYMENT.md",
             "PORTFOLIO_SUMMARY.md",
-            "RELEASE_NOTES_v4.md",
-            "RELEASE_NOTES_v6.md",
-            "RELEASE_NOTES_v9.md",
-            "RELEASE_NOTES_v13.md",
             "docs/assets/dashboard-preview.svg",
             "docs/assets/dashboard-preview.png",
             "docs/api/API_REFERENCE.md",
@@ -120,8 +116,6 @@ class ServicesPackagingTests(unittest.TestCase):
             "services/diagnostics.py",
             "docs/architecture/ARCHITECTURE.md",
             "docs/review/HONEST_LIMITATIONS.md",
-            "RELEASE_NOTES_v9.md",
-            "RELEASE_NOTES_v13.md",
             "scripts/check_frontend_bindings.py",
         ]:
             with self.subTest(path=path):

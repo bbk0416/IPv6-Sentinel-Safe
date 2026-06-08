@@ -32,7 +32,7 @@ The package is simulation-only and does not include live packet capture, packet 
 - `services/settings_store.py`
 - `services/exporters.py`
 - `services/diagnostics.py`
-- `RELEASE_NOTES_v9.md`
+- Current release note only: `RELEASE_NOTES_v27.md`
 
 
 ## Preflight hardening
@@ -47,7 +47,7 @@ The package is simulation-only and does not include live packet capture, packet 
 - `scripts/release_audit.py`
 - `docs/quality/QUALITY_GATE.md`
 - `/api/quality`
-- `RELEASE_NOTES_v13.md`
+- Historical root release notes before v27 are intentionally omitted from the public handoff.
 
 
 ## Schema contract
@@ -92,7 +92,7 @@ The package is simulation-only and does not include live packet capture, packet 
 - `scripts/check_validation_hygiene.py`
 - `services/validation_hygiene.py`
 - `docs/quality/VALIDATION_HYGIENE.md`
-- `RELEASE_NOTES_v23.md`
+- Clean validation workflow documentation is kept under `docs/quality/VALIDATION_HYGIENE.md`.
 
 These files improve clean validation workflow hygiene. They do not add live IPv6 monitoring.
 
