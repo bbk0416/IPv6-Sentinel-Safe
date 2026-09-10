@@ -3,6 +3,7 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 import contextlib
+import importlib.util
 import io
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,6 +18,7 @@ class PackagingTests(unittest.TestCase):
             "pyproject.toml",
             "Makefile",
             ".github/workflows/ci.yml",
+            "requirements.txt",
             "scripts/smoke_check.py",
             "scripts/validate_project.py",
             "DEPLOYMENT.md",
@@ -32,6 +34,7 @@ class PackagingTests(unittest.TestCase):
             "docs/security/THREAT_MODEL.md",
             "docs/release/RELEASE_PACKAGE_MANIFEST.md",
             "docs/demo/PREVIEW.html",
+            "docs/assets/dashboard-preview.png",
             "scripts/build_release.py",
             "scripts/generate_project_report.py",
             "LICENSE",
@@ -46,6 +49,39 @@ class PackagingTests(unittest.TestCase):
         self.assertIn("IPV6_SENTINEL_WEB_AUTH_ENABLED", compose)
         self.assertIn("IPV6_SENTINEL_PASSWORD", compose)
         self.assertIn("5000:5000", compose)
+
+    def test_docker_healthcheck_uses_env_basic_auth_without_password_cli_arg(self) -> None:
+        spec = importlib.util.spec_from_file_location("smoke_check", ROOT / "scripts" / "smoke_check.py")
+        self.assertIsNotNone(spec)
+        module = importlib.util.module_from_spec(spec)
+        assert spec and spec.loader
+        spec.loader.exec_module(module)
+
+        request = module.build_request(
+            "http://127.0.0.1:5000/api/ready",
+            {
+                "IPV6_SENTINEL_WEB_AUTH_ENABLED": "1",
+                "IPV6_SENTINEL_USERNAME": "admin",
+                "IPV6_SENTINEL_PASSWORD": "secret",
+            },
+        )
+        self.assertEqual(request.get_header("Authorization"), "Basic YWRtaW46c2VjcmV0")
+
+        unauthenticated = module.build_request(
+            "http://127.0.0.1:5000/api/ready",
+            {"IPV6_SENTINEL_WEB_AUTH_ENABLED": "0"},
+        )
+        self.assertIsNone(unauthenticated.get_header("Authorization"))
+
+        with self.assertRaises(RuntimeError):
+            module.build_request(
+                "http://127.0.0.1:5000/api/ready",
+                {"IPV6_SENTINEL_WEB_AUTH_ENABLED": "1"},
+            )
+
+        dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
+        self.assertIn("python scripts/smoke_check.py --url http://127.0.0.1:5000/api/ready", dockerfile)
+        self.assertNotIn("--password", dockerfile)
 
     def test_ci_uses_clean_validation_command(self) -> None:
         workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
@@ -127,7 +163,6 @@ class ServicesPackagingTests(unittest.TestCase):
         self.assertNotIn("change-this-password", compose)
 
     def test_frontend_binding_script_passes(self) -> None:
-        import importlib.util
         spec = importlib.util.spec_from_file_location("check_frontend_bindings", ROOT / "scripts" / "check_frontend_bindings.py")
         self.assertIsNotNone(spec)
         module = importlib.util.module_from_spec(spec)
