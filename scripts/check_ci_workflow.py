@@ -21,6 +21,7 @@ REQUIRED_COMMANDS = [
     "python scripts/check_publication_hygiene.py",
     "python scripts/check_release_zip.py",
     "python scripts/run_clean_validation.py",
+    "python scripts/run_full_tests.py",
 ]
 
 
