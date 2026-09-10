@@ -1,31 +1,25 @@
-name: Refresh release inventory
+name: Export release inventory
 
 on:
   pull_request:
     branches: [main]
 
-permissions:
-  contents: write
-
 jobs:
-  refresh:
+  export:
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 2
-      - name: Restore final CI and refresh inventory
+          fetch-depth: 3
+      - name: Generate inventory for final CI content
         run: |
-          git show HEAD^:.github/workflows/ci.yml > .github/workflows/ci.yml
+          git show HEAD^^:.github/workflows/ci.yml > .github/workflows/ci.yml
           python scripts/check_file_inventory.py --write
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/workflows/ci.yml docs/release/FILE_INVENTORY.json
-          if git diff --cached --quiet; then
-            echo "No inventory update required"
-            exit 0
-          fi
-          git commit -m "Refresh file inventory for Socket.IO auth fix"
-          git push origin HEAD:${{ github.event.pull_request.head.ref }}
+      - name: Upload generated inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: socketio-auth-file-inventory
+          path: docs/release/FILE_INVENTORY.json
+          if-no-files-found: error
