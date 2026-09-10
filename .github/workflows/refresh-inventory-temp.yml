@@ -1,0 +1,48 @@
+name: Temporary inventory refresh
+
+on:
+  push:
+    branches:
+      - fix/release-audit-cache-warning
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Remove temporary workflow from final tree
+        run: rm .github/workflows/refresh-inventory-temp.yml
+      - name: Refresh deterministic inventory
+        run: python scripts/check_file_inventory.py --write
+      - name: Verify cache-warning regression
+        run: |
+          python -m unittest tests.test_packaging.PackagingTests.test_ci_uses_clean_validation_command -v
+          python scripts/release_audit.py > /tmp/release-audit.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path('/tmp/release-audit.json').read_text(encoding='utf-8'))
+          release_artifact = payload['release_artifact']
+          assert release_artifact['status'] == 'pass', release_artifact
+          assert release_artifact['summary']['warnings'] == 0, release_artifact['summary']
+          cache_check = next(item for item in release_artifact['checks'] if item['name'] == 'cache_artifacts_absent_from_handoff')
+          assert cache_check['ok'] is True, cache_check
+          assert cache_check['detail']['count'] == 0, cache_check
+          print('release_artifact_cache_warnings=0')
+          PY
+      - name: Commit refreshed inventory and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/release/FILE_INVENTORY.json .github/workflows/refresh-inventory-temp.yml
+          git commit -m "Refresh inventory for bytecode-free release audit"
+          git push
