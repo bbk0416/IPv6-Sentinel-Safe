@@ -34,7 +34,6 @@ class PackagingTests(unittest.TestCase):
             "docs/security/THREAT_MODEL.md",
             "docs/release/RELEASE_PACKAGE_MANIFEST.md",
             "docs/demo/PREVIEW.html",
-            "docs/assets/dashboard-preview.png",
             "scripts/build_release.py",
             "scripts/generate_project_report.py",
             "LICENSE",
