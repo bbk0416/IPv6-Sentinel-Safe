@@ -115,11 +115,23 @@ class IPv6SentinelApp:
         self._setup_error_handlers()
         self._setup_socket_events()
 
-
     @staticmethod
     def _is_loopback_host(host: str) -> bool:
         normalized = (host or "").strip().lower()
         return normalized in {"127.0.0.1", "localhost", "::1"}
+
+    def _basic_auth_credentials_valid(self) -> bool:
+        """Validate the current request's Basic Auth credentials for HTTP or Socket.IO."""
+        if not WEB_AUTH_ENABLED:
+            return True
+        if not WEB_AUTH_PASSWORD:
+            return False
+        auth = request.authorization
+        if not auth:
+            return False
+        return hmac.compare_digest(auth.username or "", WEB_AUTH_USERNAME) and hmac.compare_digest(
+            auth.password or "", WEB_AUTH_PASSWORD
+        )
 
     def _validate_startup_security(self) -> None:
         """Fail closed when a user accidentally exposes the dashboard without auth."""
@@ -172,17 +184,13 @@ class IPv6SentinelApp:
                     503,
                     {"Content-Type": "text/plain; charset=utf-8"},
                 )
-            auth = request.authorization
-            username_ok = auth and hmac.compare_digest(auth.username or "", WEB_AUTH_USERNAME)
-            password_ok = auth and hmac.compare_digest(auth.password or "", WEB_AUTH_PASSWORD)
-            if username_ok and password_ok:
+            if self._basic_auth_credentials_valid():
                 return None
             return Response(
                 "인증이 필요합니다.",
                 401,
                 {"WWW-Authenticate": 'Basic realm="IPv6 Sentinel"'},
             )
-
 
     def _setup_security_headers(self) -> None:
         @self.app.after_request
@@ -390,7 +398,6 @@ class IPv6SentinelApp:
             )
             return jsonify(updated)
 
-
     def _setup_error_handlers(self) -> None:
         @self.app.errorhandler(404)
         def not_found(_error: Exception) -> Response | tuple[Response, int]:
@@ -405,7 +412,9 @@ class IPv6SentinelApp:
 
     def _setup_socket_events(self) -> None:
         @self.socketio.on("connect")
-        def handle_connect() -> None:
+        def handle_connect() -> bool | None:
+            if not self._basic_auth_credentials_valid():
+                return False
             self.connected_clients.add(request.sid)
             emit(
                 "connected",
@@ -419,6 +428,7 @@ class IPv6SentinelApp:
                 },
             )
             self._emit_log("system", "local-dashboard", "info", "안전 모드로 연결되었습니다.")
+            return None
 
         @self.socketio.on("disconnect")
         def handle_disconnect() -> None:
@@ -494,7 +504,6 @@ class IPv6SentinelApp:
             emit("stats_update", self._stats_snapshot())
             emit("assets_update", self._asset_list())
 
-
     def _readiness_status(self) -> tuple[Dict[str, Any], int]:
         checks = {
             "safe_mode": bool(SAFE_MODE),
@@ -562,7 +571,6 @@ class IPv6SentinelApp:
             auth_password_set=bool(WEB_AUTH_PASSWORD),
             cors_origins=SOCKETIO_CORS_ALLOWED_ORIGINS,
         )
-
 
     def _quality_gate(self) -> Dict[str, Any]:
         return run_quality_gate(
