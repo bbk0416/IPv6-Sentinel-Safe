@@ -1,0 +1,169 @@
+{
+  "assets": [
+    {
+      "integrity": null,
+      "name": "third-party-notices",
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "88c8083cbc5a75eea29f2781728bf2ecf6053ce25baca91b589eb0d683c45ed2",
+      "size": 627,
+      "source_url": null,
+      "version": null
+    },
+    {
+      "integrity": "sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p",
+      "name": "bootstrap-js",
+      "path": "bootstrap/5.1.3/bootstrap.bundle.min.js",
+      "sha256": "f5210fa3e7f0245a4c51eb7f280092c0ef99fdd28c45e17dab8cc5854fdf4fd3",
+      "size": 78129,
+      "source_url": "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js",
+      "version": "5.1.3"
+    },
+    {
+      "integrity": "sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3",
+      "name": "bootstrap-css",
+      "path": "bootstrap/5.1.3/bootstrap.min.css",
+      "sha256": "62f74b1cf824a89f03554c638e719594c309b4d8a627a758928c0516fa7890ab",
+      "size": 163873,
+      "source_url": "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",
+      "version": "5.1.3"
+    },
+    {
+      "integrity": "sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ",
+      "name": "chart.js",
+      "path": "chart.js/4.5.1/chart.umd.min.js",
+      "sha256": "48444a82d4edcb5bec0f1965faacdde18d9c17db3063d042abada2f705c9f54a",
+      "size": 208522,
+      "source_url": "https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js",
+      "version": "4.5.1"
+    },
+    {
+      "integrity": "sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==",
+      "name": "font-awesome-css",
+      "path": "font-awesome/6.0.0/css/all.min.css",
+      "sha256": "8d321d88cb97fdedc3189506c25de9292c6e73a60ebaab496243346c6404480e",
+      "size": 89220,
+      "source_url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "font-awesome-webfont-fa-brands-400.ttf",
+      "path": "font-awesome/6.0.0/webfonts/fa-brands-400.ttf",
+      "sha256": "9e122861bc5f7d6190d580b22acc5b1c3f8cdba9f495593cccd3b47d2cbfa2fd",
+      "size": 180148,
+      "source_url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-brands-400.ttf",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "font-awesome-webfont-fa-brands-400.woff2",
+      "path": "font-awesome/6.0.0/webfonts/fa-brands-400.woff2",
+      "sha256": "29bc44694c394921d1f00271128a2e4cd8293516216e24eac07a73fa821fc1f5",
+      "size": 104544,
+      "source_url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-brands-400.woff2",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "font-awesome-webfont-fa-regular-400.ttf",
+      "path": "font-awesome/6.0.0/webfonts/fa-regular-400.ttf",
+      "sha256": "709034805d10429d24862ad685d561808328329debdbca4f70487b508320a3ff",
+      "size": 60380,
+      "source_url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-regular-400.ttf",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "font-awesome-webfont-fa-regular-400.woff2",
+      "path": "font-awesome/6.0.0/webfonts/fa-regular-400.woff2",
+      "sha256": "fa79fc4f2559112ff3dd27cf5be216d9b5f88066ceef728264f5a3a1a195fc1e",
+      "size": 23900,
+      "source_url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-regular-400.woff2",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "font-awesome-webfont-fa-solid-900.ttf",
+      "path": "font-awesome/6.0.0/webfonts/fa-solid-900.ttf",
+      "sha256": "1782156bfa2054db429277b42f143298a1ce03437c05e2779ca7875112b19d3c",
+      "size": 303480,
+      "source_url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.ttf",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "font-awesome-webfont-fa-solid-900.woff2",
+      "path": "font-awesome/6.0.0/webfonts/fa-solid-900.woff2",
+      "sha256": "1b099f88c06ed0869872561c157f0ec9cbe133a0939d9ece4ee1e1f54bd4683d",
+      "size": 126828,
+      "source_url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-solid-900.woff2",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "font-awesome-webfont-fa-v4compatibility.ttf",
+      "path": "font-awesome/6.0.0/webfonts/fa-v4compatibility.ttf",
+      "sha256": "fde941c0964fab984f6af0697b3fec92e7df384eec9941babfd3e4cbbd6211c2",
+      "size": 10556,
+      "source_url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-v4compatibility.ttf",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "font-awesome-webfont-fa-v4compatibility.woff2",
+      "path": "font-awesome/6.0.0/webfonts/fa-v4compatibility.woff2",
+      "sha256": "b3abfccce275536beaaeba990e900a0c08ed2fefbabf4a8bcbb2e2ffe3f2431f",
+      "size": 4956,
+      "source_url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/webfonts/fa-v4compatibility.woff2",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "license-bootstrap",
+      "path": "licenses/bootstrap-5.1.3-LICENSE.txt",
+      "sha256": "5b30317c9c35bb6f05101c501de866cc6852ab9b655dcf5941733f6644c3ebd0",
+      "size": 1131,
+      "source_url": "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/LICENSE",
+      "version": "5.1.3"
+    },
+    {
+      "integrity": null,
+      "name": "license-chart.js",
+      "path": "licenses/chart.js-4.5.1-LICENSE.md",
+      "sha256": "41a84aa2caba645f966a18d9c2056b73e6d3a81d80bc0046bc0011a2634d4cce",
+      "size": 1093,
+      "source_url": "https://cdn.jsdelivr.net/npm/chart.js@4.5.1/LICENSE.md",
+      "version": "4.5.1"
+    },
+    {
+      "integrity": null,
+      "name": "license-font-awesome-free",
+      "path": "licenses/font-awesome-free-6.0.0-LICENSE.txt",
+      "sha256": "de784a808496d49f5f80dd9d1d6e9a51cff712cfbc339e7c25155631ae3cdb5d",
+      "size": 7427,
+      "source_url": "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/LICENSE.txt",
+      "version": "6.0.0"
+    },
+    {
+      "integrity": null,
+      "name": "license-socket.io-client",
+      "path": "licenses/socket.io-client-4.7.5-LICENSE.txt",
+      "sha256": "62e2032a1e1458b1d92a62f5fc51be48e08b95062295c91a9f3bd3686809d37e",
+      "size": 1082,
+      "source_url": "https://cdn.jsdelivr.net/npm/socket.io-client@4.7.5/LICENSE",
+      "version": "4.7.5"
+    },
+    {
+      "integrity": "sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO",
+      "name": "socket.io-client",
+      "path": "socket.io/4.7.5/socket.io.min.js",
+      "sha256": "73eba16bc895fdfa454e27ecb80def31ede8d861f99e175ff93b110eabec044f",
+      "size": 49993,
+      "source_url": "https://cdn.socket.io/4.7.5/socket.io.min.js",
+      "version": "4.7.5"
+    }
+  ],
+  "generated_by": "scripts/vendor_frontend_assets.py",
+  "purpose": "Pinned frontend assets vendored for offline/local dashboard runtime",
+  "schema_version": 1
+}

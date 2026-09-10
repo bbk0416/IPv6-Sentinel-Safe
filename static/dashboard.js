@@ -24,7 +24,7 @@ class IPv6SentinelDashboard {
     connectSocket() {
         try {
             if (typeof io === 'undefined') {
-                this.enterRestFallbackMode('Socket.IO 클라이언트 CDN을 사용할 수 없어 REST 폴링 모드로 전환했습니다.');
+                this.enterRestFallbackMode('Socket.IO 클라이언트를 사용할 수 없어 REST 폴링 모드로 전환했습니다.');
                 return;
             }
             this.socket = io();

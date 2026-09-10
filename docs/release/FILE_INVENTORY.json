@@ -4,8 +4,8 @@
   "mode": "safe_simulation",
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
-  "file_count": 139,
-  "package_sha256": "42a5885a19560de3940c34e54e0df774953daf4c8588b68a30d31138238538f2",
+  "file_count": 159,
+  "package_sha256": "fdffe22924842ac6d4a20cdaa3db0493bc3c8ad5f5d29ffdea29079343eb8e0f",
   "files": [
     {
       "path": ".dockerignore",
@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "size": 2621,
-      "sha256": "8d7eeb982151fadd358cefd1b7828af0ad8b261962b94ffe39c9fab0d3497c26"
+      "size": 2728,
+      "sha256": "2f378fbca1851f7998bd0ab5f69523dad5439c628652b48a2e4c3b08399bfe99"
     },
     {
       "path": ".gitignore",
@@ -443,6 +443,11 @@
       "sha256": "175ba6440cfcb420144ccbc61beac036f12f50fac4dea2e2057826eaefbf3a00"
     },
     {
+      "path": "scripts/vendor_frontend_assets.py",
+      "size": 9516,
+      "sha256": "14fa7cbe67b2443b4fc4d2847c0c5d67021e093dd92068db443c44005e659d6e"
+    },
+    {
       "path": "services/__init__.py",
       "size": 46,
       "sha256": "acce1ac4c4104d1a3f7de042499576c93caababc75a9ea612a9f79b3961015d3"
@@ -564,8 +569,8 @@
     },
     {
       "path": "static/dashboard.js",
-      "size": 26910,
-      "sha256": "0a0cd67d248ca1a6ad91ff36979e0a8bc239cf5bf739398f45579e13d7a13de3"
+      "size": 26906,
+      "sha256": "a4f5663837fc559ada377f4d1b8f13edf32ed3e04988edca2b994f3cd565cec6"
     },
     {
       "path": "static/favicon.ico",
@@ -573,9 +578,104 @@
       "sha256": "fefeb790bd41b685ceef0d9cb6cd1215725364a0d0fb1d156fc388fc3689d03d"
     },
     {
+      "path": "static/vendor/THIRD_PARTY_NOTICES.md",
+      "size": 627,
+      "sha256": "88c8083cbc5a75eea29f2781728bf2ecf6053ce25baca91b589eb0d683c45ed2"
+    },
+    {
+      "path": "static/vendor/VENDOR_MANIFEST.json",
+      "size": 7128,
+      "sha256": "b9800a84fbe7337d538f86f4c5b60d36a7ed7da1eb1361807cb05c9beb053bd5"
+    },
+    {
+      "path": "static/vendor/bootstrap/5.1.3/bootstrap.bundle.min.js",
+      "size": 78129,
+      "sha256": "f5210fa3e7f0245a4c51eb7f280092c0ef99fdd28c45e17dab8cc5854fdf4fd3"
+    },
+    {
+      "path": "static/vendor/bootstrap/5.1.3/bootstrap.min.css",
+      "size": 163873,
+      "sha256": "62f74b1cf824a89f03554c638e719594c309b4d8a627a758928c0516fa7890ab"
+    },
+    {
+      "path": "static/vendor/chart.js/4.5.1/chart.umd.min.js",
+      "size": 208522,
+      "sha256": "48444a82d4edcb5bec0f1965faacdde18d9c17db3063d042abada2f705c9f54a"
+    },
+    {
+      "path": "static/vendor/font-awesome/6.0.0/css/all.min.css",
+      "size": 89220,
+      "sha256": "8d321d88cb97fdedc3189506c25de9292c6e73a60ebaab496243346c6404480e"
+    },
+    {
+      "path": "static/vendor/font-awesome/6.0.0/webfonts/fa-brands-400.ttf",
+      "size": 180148,
+      "sha256": "9e122861bc5f7d6190d580b22acc5b1c3f8cdba9f495593cccd3b47d2cbfa2fd"
+    },
+    {
+      "path": "static/vendor/font-awesome/6.0.0/webfonts/fa-brands-400.woff2",
+      "size": 104544,
+      "sha256": "29bc44694c394921d1f00271128a2e4cd8293516216e24eac07a73fa821fc1f5"
+    },
+    {
+      "path": "static/vendor/font-awesome/6.0.0/webfonts/fa-regular-400.ttf",
+      "size": 60380,
+      "sha256": "709034805d10429d24862ad685d561808328329debdbca4f70487b508320a3ff"
+    },
+    {
+      "path": "static/vendor/font-awesome/6.0.0/webfonts/fa-regular-400.woff2",
+      "size": 23900,
+      "sha256": "fa79fc4f2559112ff3dd27cf5be216d9b5f88066ceef728264f5a3a1a195fc1e"
+    },
+    {
+      "path": "static/vendor/font-awesome/6.0.0/webfonts/fa-solid-900.ttf",
+      "size": 303480,
+      "sha256": "1782156bfa2054db429277b42f143298a1ce03437c05e2779ca7875112b19d3c"
+    },
+    {
+      "path": "static/vendor/font-awesome/6.0.0/webfonts/fa-solid-900.woff2",
+      "size": 126828,
+      "sha256": "1b099f88c06ed0869872561c157f0ec9cbe133a0939d9ece4ee1e1f54bd4683d"
+    },
+    {
+      "path": "static/vendor/font-awesome/6.0.0/webfonts/fa-v4compatibility.ttf",
+      "size": 10556,
+      "sha256": "fde941c0964fab984f6af0697b3fec92e7df384eec9941babfd3e4cbbd6211c2"
+    },
+    {
+      "path": "static/vendor/font-awesome/6.0.0/webfonts/fa-v4compatibility.woff2",
+      "size": 4956,
+      "sha256": "b3abfccce275536beaaeba990e900a0c08ed2fefbabf4a8bcbb2e2ffe3f2431f"
+    },
+    {
+      "path": "static/vendor/licenses/bootstrap-5.1.3-LICENSE.txt",
+      "size": 1131,
+      "sha256": "5b30317c9c35bb6f05101c501de866cc6852ab9b655dcf5941733f6644c3ebd0"
+    },
+    {
+      "path": "static/vendor/licenses/chart.js-4.5.1-LICENSE.md",
+      "size": 1093,
+      "sha256": "41a84aa2caba645f966a18d9c2056b73e6d3a81d80bc0046bc0011a2634d4cce"
+    },
+    {
+      "path": "static/vendor/licenses/font-awesome-free-6.0.0-LICENSE.txt",
+      "size": 7427,
+      "sha256": "de784a808496d49f5f80dd9d1d6e9a51cff712cfbc339e7c25155631ae3cdb5d"
+    },
+    {
+      "path": "static/vendor/licenses/socket.io-client-4.7.5-LICENSE.txt",
+      "size": 1082,
+      "sha256": "62e2032a1e1458b1d92a62f5fc51be48e08b95062295c91a9f3bd3686809d37e"
+    },
+    {
+      "path": "static/vendor/socket.io/4.7.5/socket.io.min.js",
+      "size": 49993,
+      "sha256": "73eba16bc895fdfa454e27ecb80def31ede8d861f99e175ff93b110eabec044f"
+    },
+    {
       "path": "templates/index.html",
-      "size": 15053,
-      "sha256": "875f4f95445183f5b773fc1729cca43324f6df101e4a1f06fc91e40d8a6d04e9"
+      "size": 14843,
+      "sha256": "e2a4124804814dcf562862687f5f9aceac13199ddbf1b222d1a4b0dc9a0861ae"
     },
     {
       "path": "tests/process_helpers.py",
@@ -594,8 +694,8 @@
     },
     {
       "path": "tests/test_static_safety.py",
-      "size": 30484,
-      "sha256": "29c878289c9acbf229b27bb98ef3f85af838475c843bfbe6a431e87b76793649"
+      "size": 31306,
+      "sha256": "c1f36e505a46228ba8dfb4fbfb7bc139786dc58ba386d8268ed587882d1b6eef"
     },
     {
       "path": "tests/test_v11_quality.py",
