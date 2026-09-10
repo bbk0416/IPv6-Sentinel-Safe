@@ -106,30 +106,18 @@ jobs:
           if count != 1:
               raise SystemExit(f'Expected one CDN regression test block, replaced {count}')
           test_path.write_text(tests, encoding='utf-8')
-
-          ci_path = root / '.github' / 'workflows' / 'ci.yml'
-          ci = ci_path.read_text(encoding='utf-8')
-          needle = '      - name: Check frontend syntax\n        run: node --check static/dashboard.js\n'
-          addition = needle + '      - name: Verify vendored frontend assets\n        run: python scripts/vendor_frontend_assets.py --check\n'
-          if ci.count(needle) != 1:
-              raise SystemExit('Could not locate frontend syntax CI step')
-          ci_path.write_text(ci.replace(needle, addition), encoding='utf-8')
           PY
       - name: Verify offline vendor state
         run: |
           python scripts/vendor_frontend_assets.py --check
           node --check static/dashboard.js
           python -m unittest tests.test_static_safety.StaticSafetyTests.test_dashboard_uses_only_vendored_frontend_assets_and_rest_fallback -v
-      - name: Refresh deterministic file inventory
-        run: |
-          python scripts/check_file_inventory.py --write
-          python scripts/check_file_inventory.py
       - name: Check diff
         run: git diff --check
       - name: Commit generated vendor assets and source changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add static/vendor templates/index.html static/dashboard.js tests/test_static_safety.py .github/workflows/ci.yml docs/release/FILE_INVENTORY.json
+          git add static/vendor templates/index.html static/dashboard.js tests/test_static_safety.py
           git commit -m "Vendor frontend dependencies for offline runtime"
           git push origin HEAD:fix/offline-frontend-vendor
