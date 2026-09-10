@@ -59,5 +59,7 @@ jobs:
         run: |
           # run_clean_validation.py runs the canonical clean validation gate and cleans generated artifacts.
           python scripts/run_clean_validation.py
+      - name: Run full unittest discovery
+        run: python scripts/run_full_tests.py
       - name: Build Docker image
         run: docker build -t ipv6-sentinel-safe:test .
