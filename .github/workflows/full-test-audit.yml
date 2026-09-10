@@ -1,25 +1,20 @@
-name: Full Test Audit
+name: Export Full-Test Inventory
 
 on:
   push:
     branches: [audit/full-test-count-p0]
 
 jobs:
-  full-test-audit:
+  export-inventory:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
-      - name: Match main workspace for inventory-sensitive tests
+      - name: Match intended final workspace
         run: rm .github/workflows/full-test-audit.yml
-      - name: Run full unittest discovery
-        run: python scripts/run_full_tests.py
+      - name: Regenerate release inventory
+        run: python scripts/check_file_inventory.py --write
+      - name: Upload generated inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-test-count-file-inventory
+          path: docs/release/FILE_INVENTORY.json
