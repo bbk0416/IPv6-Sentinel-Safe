@@ -1,23 +1,26 @@
-name: Export P0-2 release inventory
+name: Apply P0-2 release inventory
 
 on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
-  export:
+  refresh:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: fix/docker-healthcheck-auth-p0
-          fetch-depth: 2
-      - name: Generate inventory for final CI content
+          fetch-depth: 3
+      - name: Refresh and commit inventory only
         run: |
-          git show HEAD^:.github/workflows/ci.yml > .github/workflows/ci.yml
+          git show d6aa0802ec02a1073d6347de1a07570fff08d889:.github/workflows/ci.yml > .github/workflows/ci.yml
           python scripts/check_file_inventory.py --write
-      - name: Upload generated inventory
-        uses: actions/upload-artifact@v4
-        with:
-          name: docker-healthcheck-auth-file-inventory
-          path: docs/release/FILE_INVENTORY.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/release/FILE_INVENTORY.json
+          git commit -m "Refresh file inventory for Docker healthcheck auth fix"
+          git push origin HEAD:fix/docker-healthcheck-auth-p0
