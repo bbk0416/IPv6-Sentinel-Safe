@@ -28,6 +28,8 @@ jobs:
         run: node --check static/dashboard.js
       - name: Run Socket.IO auth regression
         run: python -m unittest tests.test_app_runtime.AppRuntimeTests.test_socketio_requires_same_basic_auth_credentials -v
+      - name: Run Docker healthcheck auth regression
+        run: python -m unittest tests.test_packaging.PackagingTests.test_docker_healthcheck_uses_env_basic_auth_without_password_cli_arg -v
       - name: Run source and runtime preflight
         run: |
           python scripts/preflight_check.py
