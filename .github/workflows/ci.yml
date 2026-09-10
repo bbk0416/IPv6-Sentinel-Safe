@@ -28,8 +28,6 @@ jobs:
         run: node --check static/dashboard.js
       - name: Run Socket.IO auth regression
         run: python -m unittest tests.test_app_runtime.AppRuntimeTests.test_socketio_requires_same_basic_auth_credentials -v
-      - name: Print changed inventory hashes
-        run: python -c "from pathlib import Path; from services.file_inventory import sha256_file, inventory_size; [print(f'{p} size={inventory_size(Path(p))} sha256={sha256_file(Path(p))}') for p in ('.github/workflows/ci.yml','app.py','tests/test_app_runtime.py')]"
       - name: Run source and runtime preflight
         run: |
           python scripts/preflight_check.py
