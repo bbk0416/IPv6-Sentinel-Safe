@@ -150,7 +150,6 @@ class AppRuntimeTests(unittest.TestCase):
         self.assertEqual(stop.status_code, 200)
         self.assertEqual(stop.get_json()["status"], "stopped")
 
-
     def test_diagnostics_endpoint_reports_safe_state(self) -> None:
         response = self.client.get("/api/diagnostics")
         self.assertEqual(response.status_code, 200)
@@ -162,7 +161,6 @@ class AppRuntimeTests(unittest.TestCase):
         self.assertIn("real_packet_features_disabled", check_names)
         self.assertIn("no_blocked_network_imports", check_names)
 
-
     def test_quality_endpoint_reports_pass(self) -> None:
         response = self.client.get("/api/quality")
         self.assertEqual(response.status_code, 200)
@@ -170,7 +168,6 @@ class AppRuntimeTests(unittest.TestCase):
         self.assertEqual(payload["status"], "pass")
         self.assertEqual(payload["version"], "27.0.0-safe")
         self.assertTrue(any(check["name"] == "version_declarations_match" for check in payload["checks"]))
-
 
     def test_release_endpoint_reports_safe_release_identity(self) -> None:
         response = self.client.get("/api/release")
@@ -199,6 +196,22 @@ class AppRuntimeTests(unittest.TestCase):
             authorized = client.get("/api/health", headers={"Authorization": "Basic YWRtaW46c2VjcmV0"})
             self.assertEqual(authorized.status_code, 200)
             protected.shutdown()
+
+    def test_socketio_requires_same_basic_auth_credentials(self) -> None:
+        with patch("app.WEB_AUTH_ENABLED", True), patch("app.WEB_AUTH_USERNAME", "admin"), patch("app.WEB_AUTH_PASSWORD", "secret"):
+            protected = IPv6SentinelApp()
+            try:
+                unauthorized = protected.socketio.test_client(protected.app)
+                self.assertFalse(unauthorized.is_connected())
+
+                authorized = protected.socketio.test_client(
+                    protected.app,
+                    headers={"Authorization": "Basic YWRtaW46c2VjcmV0"},
+                )
+                self.assertTrue(authorized.is_connected())
+                authorized.disconnect()
+            finally:
+                protected.shutdown()
 
     def test_remote_bind_without_auth_fails_closed(self) -> None:
         with patch("app.FLASK_HOST", "0.0.0.0"), patch("app.WEB_AUTH_ENABLED", False), patch("app.ALLOW_REMOTE_BIND_WITHOUT_AUTH", False):

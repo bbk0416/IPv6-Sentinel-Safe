@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 139,
-  "package_sha256": "17e570b0abc572a538d22694bf70e6bce8eefaa0a2dc77340b3d67179dc07995",
+  "package_sha256": "721f700dc1d74317d17c35a79a4dc7d5b6879aa283366416d6f7facb444ae89e",
   "files": [
     {
       "path": ".dockerignore",
@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "size": 2127,
-      "sha256": "21bbb564fd87b89fae417e7d8df3aaa77671ca5f78c01967a60afe207556bf51"
+      "size": 2296,
+      "sha256": "55ff25e2ebe8d21be45748b13fa2e53ea748c1c8997362d97703423ae73fb71f"
     },
     {
       "path": ".gitignore",
@@ -104,8 +104,8 @@
     },
     {
       "path": "app.py",
-      "size": 39772,
-      "sha256": "11093614a85e5b08a510ccc06986504743ff3bd8ba98b6857be1befb70e7fb45"
+      "size": 40167,
+      "sha256": "1b8faf8fd8de3b77ca249c3a321c47cec4db366b5fbfc0ca780862ab732612a2"
     },
     {
       "path": "docker-compose.yml",
@@ -584,8 +584,8 @@
     },
     {
       "path": "tests/test_app_runtime.py",
-      "size": 9043,
-      "sha256": "7591b92352ef288a61477c9664dea8f713be0dac6860bb1fbe9b1c1d4e746566"
+      "size": 9791,
+      "sha256": "e4a744b4bc5323c55e6910d8a20bde999c79288828e5910faa6bfb7fe78a7617"
     },
     {
       "path": "tests/test_packaging.py",

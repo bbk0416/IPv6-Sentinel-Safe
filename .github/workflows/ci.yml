@@ -26,6 +26,8 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Check frontend syntax
         run: node --check static/dashboard.js
+      - name: Run Socket.IO auth regression
+        run: python -m unittest tests.test_app_runtime.AppRuntimeTests.test_socketio_requires_same_basic_auth_credentials -v
       - name: Run source and runtime preflight
         run: |
           python scripts/preflight_check.py
