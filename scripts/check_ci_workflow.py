@@ -8,6 +8,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "ci.yml"
+REQUIRED_ACTIONS = [
+    "actions/checkout@v7",
+    "actions/setup-python@v7",
+]
+FORBIDDEN_ACTIONS = [
+    "actions/checkout@v4",
+    "actions/setup-python@v5",
+]
 REQUIRED_COMMANDS = [
     "python scripts/check_requirements.py",
     "python scripts/preflight_check.py --strict",
@@ -30,6 +38,12 @@ def check_workflow() -> dict[str, object]:
     text = WORKFLOW.read_text(encoding="utf-8") if WORKFLOW.exists() else ""
     if not text:
         errors.append("CI workflow file is missing or empty")
+    for action in REQUIRED_ACTIONS:
+        if action not in text:
+            errors.append(f"missing CI action: {action}")
+    for action in FORBIDDEN_ACTIONS:
+        if action in text:
+            errors.append(f"deprecated CI action remains: {action}")
     for command in REQUIRED_COMMANDS:
         if command not in text:
             errors.append(f"missing CI command: {command}")
@@ -41,7 +55,13 @@ def check_workflow() -> dict[str, object]:
             next_line = lines[idx + 1]
             if next_line.strip() and (len(next_line) - len(next_line.lstrip(" "))) > current_indent:
                 errors.append(f"line {idx + 1}: multi-command run step must use 'run: |'")
-    return {"status": "pass" if not errors else "fail", "errors": errors, "checked_commands": len(REQUIRED_COMMANDS)}
+    return {
+        "status": "pass" if not errors else "fail",
+        "errors": errors,
+        "checked_actions": len(REQUIRED_ACTIONS),
+        "forbidden_actions": len(FORBIDDEN_ACTIONS),
+        "checked_commands": len(REQUIRED_COMMANDS),
+    }
 
 
 def main() -> int:
