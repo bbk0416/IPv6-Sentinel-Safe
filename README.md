@@ -137,7 +137,7 @@ Windows PowerShell 검증 기준은 다음과 같습니다.
 file inventory: pass
 clean validation: pass
 project validation: pass
-full unittest discovery: 158 tests passed
+full unittest discovery: 160 tests passed
 ```
 
 검증 위생 흐름은 `docs/quality/VALIDATION_HYGIENE.md`의 `validation_hygiene` 기준을 따릅니다.
@@ -223,7 +223,7 @@ python scripts/final_handoff_check.py --plan
 ```txt
 Safe local IPv6 security-event simulator.
 No packet capture, no packet sending, no network scanning.
-Windows-verified validation and 158-test discovery pass.
+Windows-verified validation and 160-test discovery pass.
 ```
 
 ## 라이선스
