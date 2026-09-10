@@ -6,8 +6,9 @@ This optional reviewer command is safer than an unwrapped raw
 before and after the run, disables bytecode and runtime logs, places runtime data
 in a temporary directory, writes unittest output to files, emits short heartbeat
 messages while discovery runs, and kills the whole discovery process group if it
-exceeds its timeout.  The canonical quick validation command remains
-``python scripts/run_clean_validation.py``.
+exceeds its timeout.  It also verifies that reviewer-facing README test-count
+claims match the number observed by unittest discovery.  The canonical quick
+validation command remains ``python scripts/run_clean_validation.py``.
 """
 
 from __future__ import annotations
@@ -33,12 +34,27 @@ DISCOVERY_TIMEOUT_SECONDS = 90
 HEARTBEAT_SECONDS = 3
 COMPLETION_CHECK_AFTER_SECONDS = 30
 COMPLETION_SETTLE_SECONDS = 0.25
-
+README = ROOT / "README.md"
+README_TEST_COUNT_PATTERNS = (
+    re.compile(r"full unittest discovery:\s*(\d+)\s+tests passed", re.IGNORECASE),
+    re.compile(r"\b(\d+)-test discovery pass\b", re.IGNORECASE),
+)
 
 
 def _extract_count(stderr: str) -> int:
     match = re.search(r"Ran\s+(\d+)\s+tests?", stderr)
     return int(match.group(1)) if match else 0
+
+
+def _readme_claimed_test_counts() -> list[int]:
+    """Return reviewer-facing full-discovery test counts declared in README."""
+    if not README.exists():
+        return []
+    text = README.read_text(encoding="utf-8")
+    claims: list[int] = []
+    for pattern in README_TEST_COUNT_PATTERNS:
+        claims.extend(int(match.group(1)) for match in pattern.finditer(text))
+    return claims
 
 
 def _discovery_completion_state(stderr_path: Path) -> str | None:
@@ -194,11 +210,26 @@ def main() -> int:
         print("[run_full_tests] cleaning workspace after tests", file=sys.stderr, flush=True)
         clean(ROOT)
 
+    observed_tests = int(result.get("tests", 0))
+    readme_claims = _readme_claimed_test_counts()
+    readme_claims_match = bool(readme_claims) and observed_tests > 0 and all(
+        claim == observed_tests for claim in readme_claims
+    )
+    if result["ok"] and not readme_claims_match:
+        print(
+            f"[run_full_tests] README test-count mismatch: observed={observed_tests}, claims={readme_claims}",
+            file=sys.stderr,
+            flush=True,
+        )
+
+    overall_ok = bool(result["ok"]) and readme_claims_match
     payload = {
-        "status": "pass" if result["ok"] else "fail",
+        "status": "pass" if overall_ok else "fail",
         "mode": "safe_simulation",
         "summary": {
-            "tests_observed": int(result.get("tests", 0)),
+            "tests_observed": observed_tests,
+            "readme_claimed_tests": readme_claims,
+            "readme_claims_match": readme_claims_match,
             "modules_run": int(result.get("modules_run", 0)),
             "modules_total": int(result.get("modules_total", 0)),
             "returncode": result.get("returncode"),
@@ -208,6 +239,7 @@ def main() -> int:
         "notes": [
             "Use python scripts/run_clean_validation.py for the canonical quick handoff check.",
             "This optional command runs the full unittest discovery set in one bounded child process with heartbeat output and process-group timeout cleanup.",
+            "README full-discovery test-count claims must match the number observed by unittest discovery.",
             "It does not add live IPv6 packet capture, packet sending, network scanning, or production detection capability.",
         ],
     }
