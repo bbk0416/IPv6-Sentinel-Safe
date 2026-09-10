@@ -1,15 +1,16 @@
 name: Docker non-root verification
 
 on:
-  push:
+  pull_request:
     branches:
-      - ci/docker-nonroot-pip
+      - main
 
 permissions:
   contents: read
 
 jobs:
   verify:
+    if: github.head_ref == 'ci/docker-nonroot-pip'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
