@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 139,
-  "package_sha256": "3177843f84f1f108c330446d760da88f08b905959b87de79662069d2e258edda",
+  "package_sha256": "8c05f3078073b4f1bc6e8a560c62dbf0d2da08a18bc14bd41a1564f0a9711fdf",
   "files": [
     {
       "path": ".dockerignore",
@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "size": 2577,
-      "sha256": "51b6d5d9abc54b99817cc8c2e1b4c0230f82db12a4a649b2c0cd27845c384ca6"
+      "size": 2621,
+      "sha256": "8d7eeb982151fadd358cefd1b7828af0ad8b261962b94ffe39c9fab0d3497c26"
     },
     {
       "path": ".gitignore",
@@ -419,8 +419,8 @@
     },
     {
       "path": "scripts/release_audit.py",
-      "size": 3184,
-      "sha256": "be65923add41aec193bd69e92af3e894410f98a91cbb24d4e2a85d923cd3965c"
+      "size": 3216,
+      "sha256": "f3e618f05f9324bd2384e37919b1bfc2a6155649dca81428e7761d64d37ab692"
     },
     {
       "path": "scripts/run_clean_validation.py",
@@ -589,8 +589,8 @@
     },
     {
       "path": "tests/test_packaging.py",
-      "size": 8285,
-      "sha256": "6c815c3b547c205118071399d6e01e14721693abafe028be20523a59e66c17d1"
+      "size": 8509,
+      "sha256": "a9f49cd492d45c1fc80f22ffe46813d92e441779d524fd4d183fcd81878f9a3f"
     },
     {
       "path": "tests/test_static_safety.py",

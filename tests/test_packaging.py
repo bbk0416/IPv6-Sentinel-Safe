@@ -87,6 +87,10 @@ class PackagingTests(unittest.TestCase):
         self.assertIn("python scripts/run_clean_validation.py", workflow)
         self.assertNotIn("python scripts/validate_project.py", workflow)
         self.assertIn("docker build", workflow)
+        self.assertIn('PYTHONDONTWRITEBYTECODE: "1"', workflow)
+
+        release_audit = (ROOT / "scripts/release_audit.py").read_text(encoding="utf-8")
+        self.assertIn("sys.dont_write_bytecode = True", release_audit)
 
     def test_pyproject_declares_safe_name(self) -> None:
         pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
