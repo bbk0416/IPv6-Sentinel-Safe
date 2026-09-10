@@ -37,6 +37,7 @@ jobs:
               raise SystemExit("expected README test-count claim not found")
           path.write_text(text.replace(old, new, 1), encoding="utf-8")
           PY
+          python scripts/check_file_inventory.py --write
           if python scripts/run_full_tests.py > /tmp/readme-count-negative.json 2> /tmp/readme-count-negative.err; then
             echo "stale README count unexpectedly passed"
             cat /tmp/readme-count-negative.json
