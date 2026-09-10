@@ -1,0 +1,22 @@
+name: Docker non-root verification
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: github.head_ref == 'ci/docker-nonroot-pip'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build image and verify runtime user
+        run: |
+          docker build --progress=plain -t ipv6-sentinel-safe:nonroot . 2>&1 | tee /tmp/docker-build.log
+          ! grep -F "Running pip as the 'root' user" /tmp/docker-build.log
+          test "$(docker run --rm --entrypoint id ipv6-sentinel-safe:nonroot -u)" != "0"
+          docker run --rm --entrypoint python ipv6-sentinel-safe:nonroot -c "import flask, flask_socketio, psutil; print('runtime imports ok')"
