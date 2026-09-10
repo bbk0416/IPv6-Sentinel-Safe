@@ -27,6 +27,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import re
+          import textwrap
 
           root = Path('.')
           template_path = root / 'templates' / 'index.html'
@@ -61,7 +62,8 @@ jobs:
               r"    def test_dashboard_has_rest_fallback_for_cdn_failure\(self\) -> None:\n.*?\n    def test_no_wildcard_cors_default",
               re.DOTALL,
           )
-          replacement = '''    def test_dashboard_uses_only_vendored_frontend_assets_and_rest_fallback(self) -> None:
+          replacement = textwrap.indent(textwrap.dedent('''
+          def test_dashboard_uses_only_vendored_frontend_assets_and_rest_fallback(self) -> None:
               dashboard = (ROOT / 'static' / 'dashboard.js').read_text(encoding='utf-8')
               app_text = (ROOT / 'app.py').read_text(encoding='utf-8')
               template = (ROOT / 'templates' / 'index.html').read_text(encoding='utf-8')
@@ -98,7 +100,8 @@ jobs:
               self.assertIn('licenses/chart.js-4.5.1-LICENSE.md', paths)
               self.assertIn('licenses/font-awesome-free-6.0.0-LICENSE.txt', paths)
 
-          def test_no_wildcard_cors_default'''
+          def test_no_wildcard_cors_default
+          ''').strip('\n'), '    ')
           tests, count = pattern.subn(replacement, tests, count=1)
           if count != 1:
               raise SystemExit(f'Expected one CDN regression test block, replaced {count}')
