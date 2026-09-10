@@ -79,9 +79,25 @@ class StaticSafetyTests(unittest.TestCase):
     def test_dashboard_has_rest_fallback_for_cdn_failure(self) -> None:
         dashboard = (ROOT / 'static' / 'dashboard.js').read_text(encoding='utf-8')
         app_text = (ROOT / 'app.py').read_text(encoding='utf-8')
+        template = (ROOT / 'templates' / 'index.html').read_text(encoding='utf-8')
         self.assertIn('enterRestFallbackMode', dashboard)
         self.assertIn('/api/monitoring/start', app_text)
         self.assertIn('/api/assets/generate', app_text)
+
+        external_tags = re.findall(
+            r'<(?:link|script)\b[^>]*(?:href|src)="https://[^"]+"[^>]*>',
+            template,
+        )
+        self.assertEqual(len(external_tags), 5)
+        for tag in external_tags:
+            with self.subTest(tag=tag):
+                self.assertRegex(tag, r'integrity="sha(?:384|512)-[^"]+"')
+                self.assertIn('crossorigin="anonymous"', tag)
+                self.assertIn('referrerpolicy="no-referrer"', tag)
+
+        self.assertIn('chart.js@4.5.1/dist/chart.umd.min.js', template)
+        self.assertNotIn('src="https://cdn.jsdelivr.net/npm/chart.js"', template)
+        self.assertIn('https://cdn.socket.io/4.7.5/socket.io.min.js', template)
 
     def test_no_wildcard_cors_default(self) -> None:
         settings = (ROOT / 'settings.py').read_text(encoding='utf-8')
