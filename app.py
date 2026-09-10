@@ -195,10 +195,33 @@ class IPv6SentinelApp:
     def _setup_security_headers(self) -> None:
         @self.app.after_request
         def add_security_headers(response: Response) -> Response:
+            # Keep scripts and resource loading same-origin. The dashboard updates a few
+            # presentation-only style attributes at runtime, so only style attributes retain
+            # inline permission; inline JavaScript and eval-style execution remain blocked.
+            content_security_policy = (
+                "default-src 'self'; "
+                "base-uri 'none'; "
+                "object-src 'none'; "
+                "frame-ancestors 'none'; "
+                "frame-src 'none'; "
+                "form-action 'self'; "
+                "script-src 'self'; "
+                "script-src-attr 'none'; "
+                "style-src 'self'; "
+                "style-src-attr 'unsafe-inline'; "
+                "img-src 'self' data:; "
+                "font-src 'self'; "
+                "connect-src 'self' ws: wss:; "
+                "media-src 'none'"
+            )
+            response.headers.setdefault("Content-Security-Policy", content_security_policy)
             response.headers.setdefault("X-Content-Type-Options", "nosniff")
             response.headers.setdefault("X-Frame-Options", "DENY")
             response.headers.setdefault("Referrer-Policy", "no-referrer")
             response.headers.setdefault("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
+            response.headers.setdefault("Cross-Origin-Opener-Policy", "same-origin")
+            response.headers.setdefault("Cross-Origin-Resource-Policy", "same-origin")
+            response.headers.setdefault("X-Permitted-Cross-Domain-Policies", "none")
             if request.path.startswith("/api/"):
                 response.headers.setdefault("Cache-Control", "no-store")
             return response

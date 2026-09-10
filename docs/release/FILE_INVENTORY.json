@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 159,
-  "package_sha256": "fdffe22924842ac6d4a20cdaa3db0493bc3c8ad5f5d29ffdea29079343eb8e0f",
+  "package_sha256": "0464921e991359c1594d7e4c9886b95f42327cd37de4a99cf2eba7d5a692de79",
   "files": [
     {
       "path": ".dockerignore",
@@ -104,8 +104,8 @@
     },
     {
       "path": "app.py",
-      "size": 40167,
-      "sha256": "1b8faf8fd8de3b77ca249c3a321c47cec4db366b5fbfc0ca780862ab732612a2"
+      "size": 41405,
+      "sha256": "b7ea4ce58573fc1ff76df84db04c2234e6d0e4349279401506099591ec5def4a"
     },
     {
       "path": "docker-compose.yml",
@@ -684,8 +684,8 @@
     },
     {
       "path": "tests/test_app_runtime.py",
-      "size": 9791,
-      "sha256": "e4a744b4bc5323c55e6910d8a20bde999c79288828e5910faa6bfb7fe78a7617"
+      "size": 10867,
+      "sha256": "eda052d087b9be1a31895b976227cb68a1f520d594a18c58143c564bf2829160"
     },
     {
       "path": "tests/test_packaging.py",
