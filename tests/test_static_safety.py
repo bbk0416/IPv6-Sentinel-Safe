@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import json
 import re
 import unittest
 import os
@@ -9,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 def _project_py_files() -> list[Path]:
     files: list[Path] = []
-    skip_parts = {'.venv', '.testvenv', 'venv', 'env', 'node_modules', '__pycache__'}
+    skip_parts = {'.venv', '.testvenv', 'venv', 'env', 'node_modules', '__pycache__', 'vendor'}
     for dirpath, dirnames, filenames in os.walk(ROOT):
         dirnames[:] = [name for name in dirnames if name not in skip_parts]
         current = Path(dirpath)
@@ -24,7 +25,7 @@ def _project_text_files() -> list[Path]:
     suffixes = {'.py', '.js', '.html', '.css'}
     roots = [ROOT / 'static', ROOT / 'templates']
     files: list[Path] = [ROOT / 'app.py']
-    skip_parts = {'.venv', '.testvenv', 'venv', 'env', 'node_modules', '__pycache__'}
+    skip_parts = {'.venv', '.testvenv', 'venv', 'env', 'node_modules', '__pycache__', 'vendor'}
     for base in roots:
         if not base.exists():
             continue
@@ -76,28 +77,42 @@ class StaticSafetyTests(unittest.TestCase):
         self.assertNotIn('FLASK_HOST = "0.0.0.0"', settings)
 
 
-    def test_dashboard_has_rest_fallback_for_cdn_failure(self) -> None:
+    def test_dashboard_uses_only_vendored_frontend_assets_and_rest_fallback(self) -> None:
         dashboard = (ROOT / 'static' / 'dashboard.js').read_text(encoding='utf-8')
         app_text = (ROOT / 'app.py').read_text(encoding='utf-8')
         template = (ROOT / 'templates' / 'index.html').read_text(encoding='utf-8')
         self.assertIn('enterRestFallbackMode', dashboard)
         self.assertIn('/api/monitoring/start', app_text)
         self.assertIn('/api/assets/generate', app_text)
+        self.assertNotIn('클라이언트 CDN', dashboard)
 
         external_tags = re.findall(
-            r'<(?:link|script)\b[^>]*(?:href|src)="https://[^"]+"[^>]*>',
+            r'<(?:link|script)[^>]*(?:href|src)="https://[^"]+"[^>]*>',
             template,
         )
-        self.assertEqual(len(external_tags), 5)
-        for tag in external_tags:
-            with self.subTest(tag=tag):
-                self.assertRegex(tag, r'integrity="sha(?:384|512)-[^"]+"')
-                self.assertIn('crossorigin="anonymous"', tag)
-                self.assertIn('referrerpolicy="no-referrer"', tag)
+        self.assertEqual(external_tags, [])
 
-        self.assertIn('chart.js@4.5.1/dist/chart.umd.min.js', template)
-        self.assertNotIn('src="https://cdn.jsdelivr.net/npm/chart.js"', template)
-        self.assertIn('https://cdn.socket.io/4.7.5/socket.io.min.js', template)
+        expected_vendor_assets = [
+            'vendor/bootstrap/5.1.3/bootstrap.min.css',
+            'vendor/font-awesome/6.0.0/css/all.min.css',
+            'vendor/bootstrap/5.1.3/bootstrap.bundle.min.js',
+            'vendor/socket.io/4.7.5/socket.io.min.js',
+            'vendor/chart.js/4.5.1/chart.umd.min.js',
+        ]
+        for relative in expected_vendor_assets:
+            with self.subTest(relative=relative):
+                self.assertIn(f"filename='{relative}'", template)
+                self.assertTrue((ROOT / 'static' / relative).is_file())
+        self.assertEqual(template.count('integrity="sha'), 5)
+
+        manifest_path = ROOT / 'static' / 'vendor' / 'VENDOR_MANIFEST.json'
+        manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+        paths = {str(item['path']) for item in manifest['assets']}
+        self.assertTrue(any(path.startswith('font-awesome/6.0.0/webfonts/') for path in paths))
+        self.assertIn('licenses/bootstrap-5.1.3-LICENSE.txt', paths)
+        self.assertIn('licenses/socket.io-client-4.7.5-LICENSE.txt', paths)
+        self.assertIn('licenses/chart.js-4.5.1-LICENSE.md', paths)
+        self.assertIn('licenses/font-awesome-free-6.0.0-LICENSE.txt', paths)
 
     def test_no_wildcard_cors_default(self) -> None:
         settings = (ROOT / 'settings.py').read_text(encoding='utf-8')
