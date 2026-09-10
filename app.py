@@ -17,6 +17,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
+from urllib.parse import urlsplit
 
 import psutil
 from flask import Flask, Response, jsonify, render_template, request
@@ -110,6 +111,7 @@ class IPv6SentinelApp:
 
         self._validate_startup_security()
         self._setup_auth()
+        self._setup_request_origin_protection()
         self._setup_security_headers()
         self._setup_routes()
         self._setup_error_handlers()
@@ -192,6 +194,62 @@ class IPv6SentinelApp:
                 {"WWW-Authenticate": 'Basic realm="IPv6 Sentinel"'},
             )
 
+    @staticmethod
+    def _normalized_http_origin(value: str) -> tuple[str, str, int] | None:
+        """Normalize an HTTP(S) origin for strict scheme/host/port comparison."""
+        try:
+            parsed = urlsplit((value or "").strip())
+            if parsed.scheme.lower() not in {"http", "https"} or not parsed.hostname:
+                return None
+            port = parsed.port or (443 if parsed.scheme.lower() == "https" else 80)
+        except ValueError:
+            return None
+        return parsed.scheme.lower(), parsed.hostname.lower(), port
+
+    def _request_source_origin_allowed(self, value: str) -> bool:
+        source = self._normalized_http_origin(value)
+        if source is None:
+            return False
+
+        allowed_origins = {self._normalized_http_origin(request.host_url)}
+        allowed_origins.update(
+            normalized
+            for candidate in SOCKETIO_CORS_ALLOWED_ORIGINS
+            if candidate != "*"
+            for normalized in [self._normalized_http_origin(candidate)]
+            if normalized is not None
+        )
+        return source in allowed_origins
+
+    def _setup_request_origin_protection(self) -> None:
+        """Reject cross-site browser mutations while preserving non-browser API clients."""
+        unsafe_methods = {"POST", "PUT", "PATCH", "DELETE"}
+
+        @self.app.before_request
+        def reject_cross_site_api_mutation() -> Response | None:
+            if not WEB_AUTH_ENABLED or request.method not in unsafe_methods:
+                return None
+            if not request.path.startswith("/api/"):
+                return None
+
+            fetch_site = (request.headers.get("Sec-Fetch-Site") or "").strip().lower()
+            if fetch_site and fetch_site != "same-origin":
+                return jsonify({"error": "cross_site_request_blocked"}), 403
+
+            origin = request.headers.get("Origin")
+            if origin:
+                if not self._request_source_origin_allowed(origin):
+                    return jsonify({"error": "origin_mismatch"}), 403
+                return None
+
+            referer = request.headers.get("Referer")
+            if referer and not self._request_source_origin_allowed(referer):
+                return jsonify({"error": "referer_mismatch"}), 403
+
+            # Non-browser clients such as curl do not normally send Origin or
+            # Fetch Metadata. Basic Auth remains the authorization boundary for them.
+            return None
+
     def _setup_security_headers(self) -> None:
         @self.app.after_request
         def add_security_headers(response: Response) -> Response:
@@ -222,6 +280,9 @@ class IPv6SentinelApp:
             response.headers.setdefault("Cross-Origin-Opener-Policy", "same-origin")
             response.headers.setdefault("Cross-Origin-Resource-Policy", "same-origin")
             response.headers.setdefault("X-Permitted-Cross-Domain-Policies", "none")
+            if WEB_AUTH_ENABLED:
+                response.vary.add("Origin")
+                response.vary.add("Sec-Fetch-Site")
             if request.path.startswith("/api/"):
                 response.headers.setdefault("Cache-Control", "no-store")
             return response

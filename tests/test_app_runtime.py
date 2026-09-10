@@ -209,12 +209,75 @@ class AppRuntimeTests(unittest.TestCase):
     def test_auth_can_be_enabled_with_basic_auth(self) -> None:
         with patch("app.WEB_AUTH_ENABLED", True), patch("app.WEB_AUTH_USERNAME", "admin"), patch("app.WEB_AUTH_PASSWORD", "secret"):
             protected = IPv6SentinelApp()
-            client = protected.app.test_client()
-            unauthorized = client.get("/api/health")
-            self.assertEqual(unauthorized.status_code, 401)
-            authorized = client.get("/api/health", headers={"Authorization": "Basic YWRtaW46c2VjcmV0"})
-            self.assertEqual(authorized.status_code, 200)
-            protected.shutdown()
+            try:
+                client = protected.app.test_client()
+                auth_headers = {"Authorization": "Basic YWRtaW46c2VjcmV0"}
+
+                unauthorized = client.get("/api/health")
+                self.assertEqual(unauthorized.status_code, 401)
+                authorized = client.get("/api/health", headers=auth_headers)
+                self.assertEqual(authorized.status_code, 200)
+
+                non_browser = client.post(
+                    "/api/simulation/speed",
+                    headers=auth_headers,
+                    json={"speed": 4},
+                )
+                self.assertEqual(non_browser.status_code, 200)
+
+                same_origin = client.post(
+                    "/api/simulation/speed",
+                    headers={
+                        **auth_headers,
+                        "Origin": "http://localhost",
+                        "Sec-Fetch-Site": "same-origin",
+                    },
+                    json={"speed": 5},
+                )
+                self.assertEqual(same_origin.status_code, 200)
+
+                cross_site = client.post(
+                    "/api/simulation/speed",
+                    headers={
+                        **auth_headers,
+                        "Origin": "https://attacker.example",
+                        "Sec-Fetch-Site": "cross-site",
+                    },
+                    json={"speed": 6},
+                )
+                self.assertEqual(cross_site.status_code, 403)
+                self.assertEqual(cross_site.get_json()["error"], "cross_site_request_blocked")
+                self.assertIn("Origin", cross_site.headers.get("Vary", ""))
+                self.assertIn("Sec-Fetch-Site", cross_site.headers.get("Vary", ""))
+
+                same_site = client.post(
+                    "/api/simulation/speed",
+                    headers={
+                        **auth_headers,
+                        "Origin": "http://other.localhost",
+                        "Sec-Fetch-Site": "same-site",
+                    },
+                    json={"speed": 7},
+                )
+                self.assertEqual(same_site.status_code, 403)
+
+                origin_fallback = client.post(
+                    "/api/simulation/speed",
+                    headers={**auth_headers, "Origin": "https://attacker.example"},
+                    json={"speed": 8},
+                )
+                self.assertEqual(origin_fallback.status_code, 403)
+                self.assertEqual(origin_fallback.get_json()["error"], "origin_mismatch")
+
+                referer_fallback = client.post(
+                    "/api/simulation/speed",
+                    headers={**auth_headers, "Referer": "https://attacker.example/form"},
+                    json={"speed": 9},
+                )
+                self.assertEqual(referer_fallback.status_code, 403)
+                self.assertEqual(referer_fallback.get_json()["error"], "referer_mismatch")
+            finally:
+                protected.shutdown()
 
     def test_socketio_requires_same_basic_auth_credentials(self) -> None:
         with patch("app.WEB_AUTH_ENABLED", True), patch("app.WEB_AUTH_USERNAME", "admin"), patch("app.WEB_AUTH_PASSWORD", "secret"):
