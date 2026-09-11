@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12.14-slim-bookworm@sha256:782412e85d0f0984994c290652577d4018aff08145c85b262bb63dc0c7522254
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -11,9 +11,9 @@ WORKDIR /app
 
 RUN python -m venv "$VIRTUAL_ENV"
 
-COPY requirements.txt requirements-container.txt ./
+COPY requirements.txt requirements-container.txt requirements-container.lock ./
 RUN python -m pip install --no-cache-dir --upgrade pip \
-    && python -m pip install --no-cache-dir -r requirements-container.txt
+    && python -m pip install --no-cache-dir -r requirements-container.lock
 
 RUN groupadd --gid 10001 ipv6sentinel \
     && useradd --uid 10001 --gid 10001 --no-log-init --create-home ipv6sentinel \

@@ -4,8 +4,8 @@
   "mode": "safe_simulation",
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
-  "file_count": 161,
-  "package_sha256": "801a59cae5d6a158e7e6125e11c2abf8c7d619841905ddb772a54bcbd97cacfd",
+  "file_count": 162,
+  "package_sha256": "79dfbf3d50020ee2851c5d2c3baa75cb0ab83accf9a3e07df9b583808d1df38a",
   "files": [
     {
       "path": ".dockerignore",
@@ -49,8 +49,8 @@
     },
     {
       "path": "Dockerfile",
-      "size": 972,
-      "sha256": "aaff1be9f6722fb699bc20b7dc2a58bc81bf864d576652d7c8cc9f64d352d132"
+      "size": 1085,
+      "sha256": "44392d77e682cf2766d95d7c5b9eaeb441b189a3e9a18946b16ed8758e98f7d0"
     },
     {
       "path": "LICENSE",
@@ -293,6 +293,11 @@
       "sha256": "e9430154f8595924a28c1c2c9c0617776e9385dce3a0a5bbf0b7eebe18b81d38"
     },
     {
+      "path": "requirements-container.lock",
+      "size": 660,
+      "sha256": "6ca1dc0ff4dbc5fe6b8bc5bde26129d56f2a9dc9487f03d1d3bfb5dbc79b94b9"
+    },
+    {
       "path": "requirements-container.txt",
       "size": 120,
       "sha256": "600a01e499ebdf0b09a8ff5144acfe1082b4186083ce51092fbeaba0a48ab777"
@@ -379,8 +384,8 @@
     },
     {
       "path": "scripts/check_requirements.py",
-      "size": 3167,
-      "sha256": "d3a42fcb45f192177faff32c17b43c9f4a214e81188e7492988537b76220acad"
+      "size": 6908,
+      "sha256": "e7ddf36f57b68e1afcf9fd2c97c249ae2157048928e952d915422f65e41e0dc0"
     },
     {
       "path": "scripts/check_reviewer_handoff.py",
