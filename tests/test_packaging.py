@@ -45,9 +45,15 @@ class PackagingTests(unittest.TestCase):
 
     def test_docker_compose_uses_auth_when_exposing_container(self) -> None:
         compose = (ROOT / "docker-compose.yml").read_text(encoding="utf-8")
+        deployment = (ROOT / "DEPLOYMENT.md").read_text(encoding="utf-8")
         self.assertIn("IPV6_SENTINEL_WEB_AUTH_ENABLED", compose)
         self.assertIn("IPV6_SENTINEL_PASSWORD", compose)
-        self.assertIn("5000:5000", compose)
+        self.assertIn("127.0.0.1:5000:5000", compose)
+        self.assertNotIn('- "5000:5000"', compose)
+        self.assertIn("proxy_pass http://127.0.0.1:5000;", deployment)
+        self.assertIn("listen 443 ssl;", deployment)
+        self.assertIn("IPV6_SENTINEL_CORS='https://sentinel.example.com'", deployment)
+        self.assertIn("5000/tcp는 외부에 열지 않습니다", deployment)
 
     def test_docker_healthcheck_uses_env_basic_auth_without_password_cli_arg(self) -> None:
         spec = importlib.util.spec_from_file_location("smoke_check", ROOT / "scripts" / "smoke_check.py")
@@ -102,6 +108,9 @@ class PackagingTests(unittest.TestCase):
         self.assertIn("/api/ready", readme)
         self.assertIn("/api/demo/scenario", readme)
         self.assertIn("docker compose up --build", readme)
+        self.assertIn("127.0.0.1:5000:5000", readme)
+        self.assertIn("IPV6_SENTINEL_CORS=https://sentinel.example.com", readme)
+        self.assertIn("HTTPS reverse proxy", readme)
 
     def test_project_manifest_declares_simulation_only(self) -> None:
         import json
