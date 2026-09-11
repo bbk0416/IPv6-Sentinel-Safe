@@ -1004,12 +1004,19 @@ class IPv6SentinelApp:
             self.stats = MonitoringStats()
         self._emit_log("system", "local-dashboard", "success", "시뮬레이션 데이터가 초기화되었습니다.")
 
+    def start_background_runtime(self) -> None:
+        """Start simulator background work without starting an embedded web server."""
+        if self.running:
+            return
+        self.running = True
+        if self._ui_thread is None or not self._ui_thread.is_alive():
+            self._ui_thread = threading.Thread(target=self._ui_loop, daemon=True)
+            self._ui_thread.start()
+
     def start(self) -> None:
         self._setup_signal_handlers()
-        self.running = True
+        self.start_background_runtime()
         self.logger.info("%s %s 시작: http://%s:%s", APP_NAME, APP_VERSION, FLASK_HOST, FLASK_PORT)
-        self._ui_thread = threading.Thread(target=self._ui_loop, daemon=True)
-        self._ui_thread.start()
         self.socketio.run(
             self.app,
             host=FLASK_HOST,

@@ -1,0 +1,4 @@
+# IPv6 Sentinel Safe - container-only server dependencies
+-r requirements.txt
+gunicorn>=23,<24
+simple-websocket>=1.0,<2

@@ -67,3 +67,35 @@ jobs:
         run: python scripts/run_full_tests.py
       - name: Build Docker image
         run: docker build -t ipv6-sentinel-safe:test .
+      - name: Verify live Docker healthcheck with Basic Auth
+        if: matrix.python-version == '3.12'
+        run: |
+          container_name="ipv6-sentinel-health-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          cleanup() { docker rm -f "$container_name" >/dev/null 2>&1 || true; }
+          trap cleanup EXIT
+
+          docker run -d --name "$container_name" \
+            -e IPV6_SENTINEL_HOST=0.0.0.0 \
+            -e IPV6_SENTINEL_WEB_AUTH_ENABLED=1 \
+            -e IPV6_SENTINEL_USERNAME=ci-health \
+            -e IPV6_SENTINEL_PASSWORD=ci-healthcheck-only \
+            ipv6-sentinel-safe:test
+
+          for attempt in $(seq 1 30); do
+            status="$(docker inspect --format='{{.State.Health.Status}}' "$container_name")"
+            echo "health attempt ${attempt}: ${status}"
+            if [ "$status" = "healthy" ]; then
+              docker inspect --format='{{json .State.Health}}' "$container_name"
+              exit 0
+            fi
+            if [ "$status" = "unhealthy" ]; then
+              docker logs "$container_name"
+              docker inspect "$container_name"
+              exit 1
+            fi
+            sleep 2
+          done
+
+          docker logs "$container_name"
+          docker inspect "$container_name"
+          exit 1
