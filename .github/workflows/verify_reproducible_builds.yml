@@ -40,6 +40,8 @@ jobs:
         run: |
           python scripts/check_requirements.py
           git status --short
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/release/FILE_INVENTORY.json
           git diff --cached --quiet || git commit -m "chore: finalize reproducible container build metadata"
           git push
