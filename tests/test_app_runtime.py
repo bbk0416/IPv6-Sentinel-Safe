@@ -206,12 +206,17 @@ class AppRuntimeTests(unittest.TestCase):
         self.assertFalse(payload["safety"]["real_packet_send_enabled"])
         self.assertEqual(payload["project"]["version"], "27.0.0-safe")
 
+    def test_short_basic_auth_password_is_rejected_at_startup(self) -> None:
+        with patch("app.WEB_AUTH_ENABLED", True), patch("app.WEB_AUTH_USERNAME", "admin"), patch("app.WEB_AUTH_PASSWORD", "short"):
+            with self.assertRaisesRegex(RuntimeError, "at least 12 characters"):
+                IPv6SentinelApp()
+
     def test_auth_can_be_enabled_with_basic_auth(self) -> None:
-        with patch("app.WEB_AUTH_ENABLED", True), patch("app.WEB_AUTH_USERNAME", "admin"), patch("app.WEB_AUTH_PASSWORD", "secret"):
+        with patch("app.WEB_AUTH_ENABLED", True), patch("app.WEB_AUTH_USERNAME", "admin"), patch("app.WEB_AUTH_PASSWORD", "secret-password"):
             protected = IPv6SentinelApp()
             try:
                 client = protected.app.test_client()
-                auth_headers = {"Authorization": "Basic YWRtaW46c2VjcmV0"}
+                auth_headers = {"Authorization": "Basic YWRtaW46c2VjcmV0LXBhc3N3b3Jk"}
 
                 unauthorized = client.get("/api/health")
                 self.assertEqual(unauthorized.status_code, 401)
@@ -280,7 +285,7 @@ class AppRuntimeTests(unittest.TestCase):
                 protected.shutdown()
 
     def test_socketio_requires_same_basic_auth_credentials(self) -> None:
-        with patch("app.WEB_AUTH_ENABLED", True), patch("app.WEB_AUTH_USERNAME", "admin"), patch("app.WEB_AUTH_PASSWORD", "secret"):
+        with patch("app.WEB_AUTH_ENABLED", True), patch("app.WEB_AUTH_USERNAME", "admin"), patch("app.WEB_AUTH_PASSWORD", "secret-password"):
             protected = IPv6SentinelApp()
             try:
                 unauthorized = protected.socketio.test_client(protected.app)
@@ -288,7 +293,7 @@ class AppRuntimeTests(unittest.TestCase):
 
                 authorized = protected.socketio.test_client(
                     protected.app,
-                    headers={"Authorization": "Basic YWRtaW46c2VjcmV0"},
+                    headers={"Authorization": "Basic YWRtaW46c2VjcmV0LXBhc3N3b3Jk"},
                 )
                 self.assertTrue(authorized.is_connected())
                 authorized.disconnect()

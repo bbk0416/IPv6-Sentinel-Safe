@@ -59,6 +59,7 @@ from settings import (
     WEB_AUTH_ENABLED,
     WEB_AUTH_PASSWORD,
     WEB_AUTH_USERNAME,
+    WEB_AUTH_MIN_PASSWORD_LENGTH,
     SAFE_MODE,
     SIMULATION_MODE,
     REAL_NETWORK_SCAN_ENABLED,
@@ -137,6 +138,10 @@ class IPv6SentinelApp:
 
     def _validate_startup_security(self) -> None:
         """Fail closed when a user accidentally exposes the dashboard without auth."""
+        if WEB_AUTH_ENABLED and len(WEB_AUTH_PASSWORD) < WEB_AUTH_MIN_PASSWORD_LENGTH:
+            raise RuntimeError(
+                f"IPV6_SENTINEL_PASSWORD must contain at least {WEB_AUTH_MIN_PASSWORD_LENGTH} characters when Basic Auth is enabled."
+            )
         remote_bind = not self._is_loopback_host(FLASK_HOST)
         if remote_bind and not ALLOW_REMOTE_BIND_WITHOUT_AUTH:
             if not WEB_AUTH_ENABLED or not WEB_AUTH_PASSWORD:
