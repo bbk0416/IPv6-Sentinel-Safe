@@ -19,6 +19,8 @@ class PackagingTests(unittest.TestCase):
             "Makefile",
             ".github/workflows/ci.yml",
             "requirements.txt",
+            "requirements-container.txt",
+            "wsgi.py",
             "scripts/smoke_check.py",
             "scripts/validate_project.py",
             "DEPLOYMENT.md",
@@ -87,6 +89,20 @@ class PackagingTests(unittest.TestCase):
         dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
         self.assertIn("python scripts/smoke_check.py --url http://127.0.0.1:5000/api/ready", dockerfile)
         self.assertNotIn("--password", dockerfile)
+        self.assertIn('IPV6_SENTINEL_HOST=0.0.0.0', dockerfile)
+        self.assertIn('requirements-container.txt', dockerfile)
+        self.assertIn('"gunicorn"', dockerfile)
+        self.assertIn('"wsgi:application"', dockerfile)
+        self.assertNotIn('CMD ["python", "app.py"]', dockerfile)
+
+        container_requirements = (ROOT / "requirements-container.txt").read_text(encoding="utf-8")
+        self.assertIn("gunicorn", container_requirements)
+        self.assertIn("simple-websocket", container_requirements)
+
+        wsgi = (ROOT / "wsgi.py").read_text(encoding="utf-8")
+        self.assertIn("IPv6SentinelApp", wsgi)
+        self.assertIn("start_background_runtime", wsgi)
+        self.assertIn("application = sentinel.app", wsgi)
 
         workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
         self.assertIn("Verify live Docker healthcheck with Basic Auth", workflow)

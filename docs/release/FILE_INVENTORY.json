@@ -4,8 +4,8 @@
   "mode": "safe_simulation",
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
-  "file_count": 159,
-  "package_sha256": "4851b0cc3dad2ebfb67302f4d0cf0cb1a1e1606f4c7197ab516f2dae07c6e915",
+  "file_count": 161,
+  "package_sha256": "801a59cae5d6a158e7e6125e11c2abf8c7d619841905ddb772a54bcbd97cacfd",
   "files": [
     {
       "path": ".dockerignore",
@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "size": 2728,
-      "sha256": "2f378fbca1851f7998bd0ab5f69523dad5439c628652b48a2e4c3b08399bfe99"
+      "size": 4003,
+      "sha256": "a0d0e939fbabd24a5269c6696c7f3fe61ed49ba605427f0fb66d8ff54374e6ee"
     },
     {
       "path": ".gitignore",
@@ -44,13 +44,13 @@
     },
     {
       "path": "DEPLOYMENT.md",
-      "size": 5157,
-      "sha256": "2a554934c80af2c9bc6f9f80ab1ac07b2dbdff082d67741eec8292a35ab00339"
+      "size": 5367,
+      "sha256": "0ed5977091b69615e4fbb77466fc16c34af68400b9803e8f19e0eb14ff52d14d"
     },
     {
       "path": "Dockerfile",
-      "size": 819,
-      "sha256": "4d885e745d7e4f9827dd6262bcf2f861f80cf38777fb9ef154df294cd944560e"
+      "size": 972,
+      "sha256": "aaff1be9f6722fb699bc20b7dc2a58bc81bf864d576652d7c8cc9f64d352d132"
     },
     {
       "path": "LICENSE",
@@ -104,8 +104,8 @@
     },
     {
       "path": "app.py",
-      "size": 44077,
-      "sha256": "ed47beaf05c998097a21475e9701940ca77c0626b7543300922020725fc505e2"
+      "size": 44375,
+      "sha256": "631553069506fafc3e2442ca78a6ed70b570a51f9625e42a6364a5e7663b338c"
     },
     {
       "path": "docker-compose.yml",
@@ -293,6 +293,11 @@
       "sha256": "e9430154f8595924a28c1c2c9c0617776e9385dce3a0a5bbf0b7eebe18b81d38"
     },
     {
+      "path": "requirements-container.txt",
+      "size": 120,
+      "sha256": "600a01e499ebdf0b09a8ff5144acfe1082b4186083ce51092fbeaba0a48ab777"
+    },
+    {
       "path": "requirements.txt",
       "size": 183,
       "sha256": "2cbe3fe584119c32d83c5baeb9efdb6df7fb97cb299de8ded8c06a21970da081"
@@ -324,8 +329,8 @@
     },
     {
       "path": "scripts/check_ci_workflow.py",
-      "size": 2625,
-      "sha256": "3496b9db39978cbfe6e32f05b156db64fd2b22e0841a8a3b8393ebe2ba1b3cdc"
+      "size": 2731,
+      "sha256": "16cf7a6add8a8393d5d78d66a366b47c868dfce2229076ca9e66c55a3f22f6d8"
     },
     {
       "path": "scripts/check_file_inventory.py",
@@ -374,8 +379,8 @@
     },
     {
       "path": "scripts/check_requirements.py",
-      "size": 2451,
-      "sha256": "c13d54ded01ebbd2291c24b48aeafd12681b58fc02ed58e0c40650917f729336"
+      "size": 3167,
+      "sha256": "d3a42fcb45f192177faff32c17b43c9f4a214e81188e7492988537b76220acad"
     },
     {
       "path": "scripts/check_reviewer_handoff.py",
@@ -689,8 +694,8 @@
     },
     {
       "path": "tests/test_packaging.py",
-      "size": 9121,
-      "sha256": "0b639dd60fbd626d94fcaaab6f4fff7abdc9ff55a0b3809e8aac42a817d3d2cf"
+      "size": 10534,
+      "sha256": "a7f25f5df742438ac5b8253297f5b069a3f94ab4aebee6bc9dca2003566dc548"
     },
     {
       "path": "tests/test_static_safety.py",
@@ -801,6 +806,11 @@
       "path": "utils/performance_monitor.py",
       "size": 2318,
       "sha256": "56069f0151373523583c020dd312b2a33a85682ffca73e53a7b8ac5b0a637eba"
+    },
+    {
+      "path": "wsgi.py",
+      "size": 275,
+      "sha256": "5424714f1e2d17a2c053f9c1bbc6d064807bbed5bf23928b795631a8845a7834"
     }
   ]
 }

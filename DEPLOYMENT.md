@@ -19,7 +19,7 @@ http://127.0.0.1:5000
 
 ## 2. Docker 로컬 실행
 
-Docker 컨테이너 내부에서는 앱이 `0.0.0.0:5000`을 사용하지만, 호스트에는 loopback으로만 포트를 공개합니다.
+Docker 컨테이너 내부에서는 앱이 `0.0.0.0:5000`을 사용하지만, 호스트에는 loopback으로만 포트를 공개합니다. 컨테이너는 Flask 개발 서버가 아니라 Gunicorn 단일 worker + threaded WebSocket 구성을 사용합니다. 로컬 `python app.py` 실행은 계속 localhost 전용 embedded server 경로입니다.
 
 ```bash
 docker build -t ipv6-sentinel-safe:latest .
