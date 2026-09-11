@@ -18,6 +18,8 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
+      - name: Remove helper before repository validation
+        run: rm -f .github/workflows/verify_reproducible_builds.yml
       - name: Verify lock and immutable base configuration
         run: python scripts/check_requirements.py
       - name: Install locked test dependencies
@@ -32,9 +34,8 @@ jobs:
         run: |
           docker inspect --format='image={{.Id}} user={{.Config.User}}' ipv6-sentinel-safe:reproducible
           test "$(docker inspect --format='{{.Config.User}}' ipv6-sentinel-safe:reproducible)" = "ipv6sentinel"
-      - name: Regenerate inventory without helper workflow
+      - name: Regenerate inventory after helper removal
         run: |
-          rm -f .github/workflows/verify_reproducible_builds.yml
           python scripts/check_file_inventory.py --write
           python scripts/check_requirements.py
           git status --short
