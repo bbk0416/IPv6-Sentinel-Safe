@@ -20,6 +20,8 @@ jobs:
           python-version: "3.12"
       - name: Remove helper before repository validation
         run: rm -f .github/workflows/verify_reproducible_builds.yml
+      - name: Refresh inventory after helper removal
+        run: python scripts/check_file_inventory.py --write
       - name: Verify lock and immutable base configuration
         run: python scripts/check_requirements.py
       - name: Install locked test dependencies
@@ -34,11 +36,10 @@ jobs:
         run: |
           docker inspect --format='image={{.Id}} user={{.Config.User}}' ipv6-sentinel-safe:reproducible
           test "$(docker inspect --format='{{.Config.User}}' ipv6-sentinel-safe:reproducible)" = "ipv6sentinel"
-      - name: Regenerate inventory after helper removal
+      - name: Commit final inventory without helper workflow
         run: |
-          python scripts/check_file_inventory.py --write
           python scripts/check_requirements.py
           git status --short
-          git add -A
-          git commit -m "chore: finalize reproducible container build metadata"
+          git add docs/release/FILE_INVENTORY.json
+          git diff --cached --quiet || git commit -m "chore: finalize reproducible container build metadata"
           git push
