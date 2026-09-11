@@ -88,6 +88,15 @@ class PackagingTests(unittest.TestCase):
         self.assertIn("python scripts/smoke_check.py --url http://127.0.0.1:5000/api/ready", dockerfile)
         self.assertNotIn("--password", dockerfile)
 
+        workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+        self.assertIn("Verify live Docker healthcheck with Basic Auth", workflow)
+        self.assertIn("if: matrix.python-version == '3.12'", workflow)
+        self.assertIn('docker run -d --name "$container_name"', workflow)
+        self.assertIn("IPV6_SENTINEL_WEB_AUTH_ENABLED=1", workflow)
+        self.assertIn("docker inspect --format='{{.State.Health.Status}}'", workflow)
+        self.assertIn('if [ "$status" = "healthy" ]', workflow)
+        self.assertIn('docker rm -f "$container_name"', workflow)
+
     def test_ci_uses_clean_validation_command(self) -> None:
         workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
         self.assertIn("python scripts/run_clean_validation.py", workflow)
