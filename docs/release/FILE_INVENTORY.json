@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 162,
-  "package_sha256": "070c5fc769fed08742fe87ea1ab356aec43bf1ca92f99e29bebe906720befe27",
+  "package_sha256": "97aa8ace282c9dad200698eda21b53fb891d94050b540c31b31c9af7c1a79d65",
   "files": [
     {
       "path": ".dockerignore",
@@ -14,8 +14,8 @@
     },
     {
       "path": ".env.example",
-      "size": 1020,
-      "sha256": "e6386e500a0d5ea41f31e78f836bd910f249c1343091706bbb06af47abb8018d"
+      "size": 1075,
+      "sha256": "543d4b7270be59ab056064b07e13166c9c545127a013b9d141a4cf750bd1b302"
     },
     {
       "path": ".gitattributes",
@@ -74,8 +74,8 @@
     },
     {
       "path": "README.md",
-      "size": 9087,
-      "sha256": "70d5ffdaf11a82e895bc8cee2e62a29b1c6eef1fe906839a07e1957e2400acec"
+      "size": 9130,
+      "sha256": "bae26727cf40f9401981cc30c7241decc5c8e9fd30935aa56f14353ca5c29ab1"
     },
     {
       "path": "RELEASE_NOTES_v27.md",
@@ -94,8 +94,8 @@
     },
     {
       "path": "SECURITY_CHECKLIST.md",
-      "size": 986,
-      "sha256": "bd9342a42bc3f9b534970572d4ee259b88acc4b5d046c32237905c16ff15b963"
+      "size": 1023,
+      "sha256": "d3d448ec0b4e25652a655244a7073724e1cb36c56e73184497d69e01840069a8"
     },
     {
       "path": "VALIDATION_REPORT.md",
@@ -104,8 +104,8 @@
     },
     {
       "path": "app.py",
-      "size": 44375,
-      "sha256": "631553069506fafc3e2442ca78a6ed70b570a51f9625e42a6364a5e7663b338c"
+      "size": 44676,
+      "sha256": "f99811bb7dd70251eee031486a77d1f1ae076cd4c9cb4834e26c0a1150ae357a"
     },
     {
       "path": "docker-compose.yml",
@@ -569,8 +569,8 @@
     },
     {
       "path": "settings.py",
-      "size": 3036,
-      "sha256": "477b756b73c456931865711b20d271d3aa7d78db6e1cd7fae2ea3a8ff77a1539"
+      "size": 3070,
+      "sha256": "081e70a7b7fe8fae41da9e9b9aa128a9c4056072aaec8f41ec331b018cccd7c2"
     },
     {
       "path": "static/dashboard.css",
@@ -694,8 +694,8 @@
     },
     {
       "path": "tests/test_app_runtime.py",
-      "size": 13514,
-      "sha256": "5af0dcb7839dcc50f821ffea9b510228b8a3319bc745da3ca0a8109865db3fca"
+      "size": 13881,
+      "sha256": "c4bbb932d160fcaa69bf9d61ef363ea710b40207ff7f2e596fb91b18d8a4972b"
     },
     {
       "path": "tests/test_packaging.py",

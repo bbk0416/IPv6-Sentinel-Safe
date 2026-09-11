@@ -10,7 +10,7 @@ IPv6 Sentinel Safe is a local, simulation-only dashboard. Before sharing or demo
 - [x] Real packet send is disabled.
 - [x] Real network scanning is disabled.
 - [x] Remote bind without authentication fails closed by default.
-- [x] Basic Auth can be enabled through environment variables.
+- [x] Basic Auth can be enabled through environment variables with a minimum 12-character password.
 - [x] API responses include defensive security headers.
 
 ## Recommended demo setting

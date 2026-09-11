@@ -139,7 +139,7 @@ Windows PowerShell 검증 기준은 다음과 같습니다.
 file inventory: pass
 clean validation: pass
 project validation: pass
-full unittest discovery: 160 tests passed
+full unittest discovery: 161 tests passed
 ```
 
 검증 위생 흐름은 `docs/quality/VALIDATION_HYGIENE.md`의 `validation_hygiene` 기준을 따릅니다.
@@ -186,7 +186,7 @@ python scripts/final_handoff_check.py --plan
 - 기본 바인딩은 `127.0.0.1`입니다.
 - 원격 접근 가능한 주소로 열 때는 기본적으로 인증이 필요합니다.
 - CORS 기본값은 localhost 명시 허용이며 와일드카드 `*`를 기본으로 사용하지 않습니다.
-- Basic Auth 사용 시 상태 변경 REST 요청은 브라우저의 Origin/Fetch Metadata를 확인해 교차 사이트 요청을 거부합니다.
+- Basic Auth 사용 시 최소 12자 비밀번호를 요구하며, 상태 변경 REST 요청은 브라우저의 Origin/Fetch Metadata를 확인해 교차 사이트 요청을 거부합니다.
 - 대시보드에 표시되는 자산과 이벤트는 모두 로컬 샘플 데이터입니다.
 - 실제 네트워크 트래픽을 만들거나 보내는 의존성은 사용하지 않습니다.
 - 로그와 사용자 설정은 로컬 `logs/`, `data/` 폴더에 저장됩니다.
@@ -227,7 +227,7 @@ python scripts/final_handoff_check.py --plan
 ```txt
 Safe local IPv6 security-event simulator.
 No packet capture, no packet sending, no network scanning.
-Windows-verified validation and 160-test discovery pass.
+Windows-verified validation and 161-test discovery pass.
 ```
 
 ## 라이선스
