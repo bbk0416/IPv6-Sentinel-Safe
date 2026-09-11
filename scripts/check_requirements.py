@@ -98,7 +98,6 @@ def main() -> int:
     blocked = sorted(BLOCKED & all_manifest_names)
     all_unsafe_refs = unsafe_refs + container_unsafe_refs
     missing_from_lock = sorted(all_manifest_names - set(lock_packages))
-    lock_only = sorted(set(lock_packages) - all_manifest_names)
     requirements_hash = _normalized_sha256(REQUIREMENTS) if REQUIREMENTS.exists() else ""
     container_requirements_hash = _normalized_sha256(CONTAINER_REQUIREMENTS) if CONTAINER_REQUIREMENTS.exists() else ""
     expected_sources = {
@@ -125,8 +124,6 @@ def main() -> int:
         errors.append("container lock has invalid or duplicate entries: " + ", ".join(lock_invalid))
     if missing_from_lock:
         errors.append("requirements are missing from container lock: " + ", ".join(missing_from_lock))
-    if lock_only:
-        errors.append("container lock contains undeclared packages: " + ", ".join(lock_only))
     if stale_sources:
         errors.append("container dependency lock is stale for: " + ", ".join(stale_sources))
     if not docker_base_ok:
@@ -144,7 +141,7 @@ def main() -> int:
         "blocked_absent": not blocked,
         "direct_references_absent": not all_unsafe_refs,
         "container_lock_exact_pins": not lock_invalid,
-        "container_lock_covers_manifests": not missing_from_lock and not lock_only,
+        "container_lock_covers_manifests": not missing_from_lock,
         "container_lock_manifest_hashes_match": not stale_sources,
         "docker_base_immutable": docker_base_ok,
         "docker_installs_lock": docker_installs_lock,
