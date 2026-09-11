@@ -10,7 +10,7 @@ services:
       IPV6_SENTINEL_PASSWORD: ${IPV6_SENTINEL_PASSWORD:?Set IPV6_SENTINEL_PASSWORD before running docker compose}
       IPV6_SENTINEL_CORS: ${IPV6_SENTINEL_CORS:-http://127.0.0.1:5000,http://localhost:5000}
     ports:
-      - "5000:5000"
+      - "127.0.0.1:5000:5000"
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs

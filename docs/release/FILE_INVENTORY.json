@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 159,
-  "package_sha256": "6423ad7bce3fd4001c57d13d8171d28827d5fcb75f4a0ffa76f3d7a11e3faa46",
+  "package_sha256": "4851b0cc3dad2ebfb67302f4d0cf0cb1a1e1606f4c7197ab516f2dae07c6e915",
   "files": [
     {
       "path": ".dockerignore",
@@ -44,8 +44,8 @@
     },
     {
       "path": "DEPLOYMENT.md",
-      "size": 1334,
-      "sha256": "af7523c4e672714aaf270b268533ff65de97715c2f7dd694e33bcf1d4951c307"
+      "size": 5157,
+      "sha256": "2a554934c80af2c9bc6f9f80ab1ac07b2dbdff082d67741eec8292a35ab00339"
     },
     {
       "path": "Dockerfile",
@@ -74,8 +74,8 @@
     },
     {
       "path": "README.md",
-      "size": 8447,
-      "sha256": "32653b598e00f2980597ce4982c91de6b6625ccd3a1ecb6b245ccc7d326a64ef"
+      "size": 9087,
+      "sha256": "70d5ffdaf11a82e895bc8cee2e62a29b1c6eef1fe906839a07e1957e2400acec"
     },
     {
       "path": "RELEASE_NOTES_v27.md",
@@ -109,8 +109,8 @@
     },
     {
       "path": "docker-compose.yml",
-      "size": 600,
-      "sha256": "5760d5d8738ada367858c97bb2b1ce6a372425787d3d12a3ce3cd0bf696c638c"
+      "size": 610,
+      "sha256": "9e95cec4eab1e7c6bb7ae2cde49189d2445a0a34c36eaaa979191d39728a5418"
     },
     {
       "path": "docs/api/API_REFERENCE.md",
@@ -269,8 +269,8 @@
     },
     {
       "path": "docs/security/THREAT_MODEL.md",
-      "size": 898,
-      "sha256": "236ad730387909a724a780bd21f37f95bce8808e7c102abbebdd7a4cadeb7fa6"
+      "size": 1608,
+      "sha256": "7a621985bd06c97df4ea1d84ad7e1357484056b9e87da95d8239c9688f5530ca"
     },
     {
       "path": "models/config_manager.py",
@@ -689,8 +689,8 @@
     },
     {
       "path": "tests/test_packaging.py",
-      "size": 8509,
-      "sha256": "a9f49cd492d45c1fc80f22ffe46813d92e441779d524fd4d183fcd81878f9a3f"
+      "size": 9121,
+      "sha256": "0b639dd60fbd626d94fcaaab6f4fff7abdc9ff55a0b3809e8aac42a817d3d2cf"
     },
     {
       "path": "tests/test_static_safety.py",

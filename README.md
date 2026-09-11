@@ -93,7 +93,7 @@ http://127.0.0.1:5000
 
 ## Docker 실행
 
-Docker Compose는 외부 포트 노출을 전제로 하므로 기본 인증 비밀번호를 직접 지정해야 합니다. 현재 v27 패키지에서도 비밀번호를 직접 지정하지 않으면 실행이 실패합니다.
+현재 v27 패키지에서도 Docker Compose는 컨테이너의 5000번 포트를 호스트 `127.0.0.1:5000`에만 공개합니다. Basic Auth도 기본 활성화되므로 비밀번호를 직접 지정해야 하며, 비밀번호가 없으면 실행이 실패합니다.
 
 ```bash
 IPV6_SENTINEL_PASSWORD=change-me-local-demo docker compose up --build
@@ -103,13 +103,15 @@ IPV6_SENTINEL_PASSWORD=change-me-local-demo docker compose up --build
 
 ```bash
 docker build -t ipv6-sentinel-safe:latest .
-docker run --rm -p 5000:5000 \
+docker run --rm -p 127.0.0.1:5000:5000 \
   -e IPV6_SENTINEL_HOST=0.0.0.0 \
   -e IPV6_SENTINEL_WEB_AUTH_ENABLED=1 \
   -e IPV6_SENTINEL_USERNAME=admin \
   -e IPV6_SENTINEL_PASSWORD='change-me-local-demo' \
   ipv6-sentinel-safe:latest
 ```
+
+원격 접속이 필요하면 5000번 포트를 직접 외부에 공개하지 않습니다. **Basic Auth는 암호화가 아니므로 HTTPS가 필수**입니다. 같은 호스트의 reverse proxy가 `https://sentinel.example.com` 같은 공개 주소에서 TLS를 종료하고 `127.0.0.1:5000`으로 전달하도록 구성합니다. 이때 `IPV6_SENTINEL_CORS=https://sentinel.example.com`처럼 실제 공개 HTTPS Origin을 정확히 지정합니다. 전체 예시는 `DEPLOYMENT.md`를 참고하세요.
 
 ## v27 검증 기준
 
@@ -214,6 +216,7 @@ python scripts/final_handoff_check.py --plan
 | `PROJECT_COMPLETION_REPORT.md` | 완성 보고서 |
 | `VALIDATION_REPORT.md` | 검증 결과 요약 |
 | `RELEASE_NOTES_v27.md` | 현재 최종 릴리스 노트 |
+| `DEPLOYMENT.md` | 로컬 실행과 HTTPS reverse proxy 원격 배포 기준 |
 | `docs/review/HONEST_LIMITATIONS.md` | 한계와 비기능 범위 |
 | `docs/quality/CAPABILITY_BOUNDARY.md` | 지원 범위와 비지원 범위 |
 | `docs/quality/VALIDATION_HYGIENE.md` | validation_hygiene 검증 흐름 |
