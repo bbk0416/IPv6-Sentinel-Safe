@@ -12,8 +12,7 @@ WORKDIR /app
 RUN python -m venv "$VIRTUAL_ENV"
 
 COPY requirements.txt requirements-container.txt requirements-container.lock ./
-RUN python -m pip install --no-cache-dir --upgrade pip \
-    && python -m pip install --no-cache-dir -r requirements-container.lock
+RUN python -m pip install --no-cache-dir -r requirements-container.lock
 
 RUN groupadd --gid 10001 ipv6sentinel \
     && useradd --uid 10001 --gid 10001 --no-log-init --create-home ipv6sentinel \
