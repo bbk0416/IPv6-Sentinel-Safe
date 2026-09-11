@@ -1,0 +1,30 @@
+name: Refresh inventory
+
+on:
+  push:
+    branches:
+      - fix/update-inventory-after-pip-cleanup
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Refresh inventory
+        run: python scripts/check_file_inventory.py --write
+      - name: Remove helper workflow and commit inventory
+        run: |
+          rm -f .github/workflows/refresh_inventory.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/release/FILE_INVENTORY.json .github/workflows/refresh_inventory.yml
+          git commit -m "chore: refresh deterministic file inventory"
+          git push
