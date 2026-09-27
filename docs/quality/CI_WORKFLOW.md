@@ -1,11 +1,20 @@
 # CI Workflow Sanity Gate - 27.0.0-safe
 
-`27.0.0-safe` adds a lightweight CI workflow sanity check:
+Run the lightweight workflow contract check with:
 
 ```bash
 python scripts/check_ci_workflow.py
 ```
 
-This project avoids adding a YAML parser dependency just for source-package validation, so the check is intentionally simple. It verifies that the GitHub Actions workflow contains the required validation commands and catches a common YAML mistake: placing multiple shell commands under a single-line `run:` step without using `run: |`.
+The repository intentionally avoids adding a YAML parser dependency only for source-package validation. The checker therefore performs bounded text-based checks for the workflow requirements that matter to the handoff.
 
-The check is not a replacement for running GitHub Actions on GitHub. It is a local guard against obvious workflow drift before publishing the repository.
+It verifies:
+
+- current `actions/checkout@v7` and `actions/setup-python@v7` actions are present
+- required validation commands remain in `.github/workflows/ci.yml`
+- the Ubuntu Python 3.10/3.11/3.12 validation matrix remains present
+- a `windows-latest` Python 3.12 validation job remains present
+- the Windows job runs clean validation, full unittest discovery, release ZIP hygiene, and the workflow contract check
+- multi-command shell steps use `run: |` instead of malformed single-line YAML
+
+The check is not a replacement for GitHub Actions execution. Its purpose is to fail locally when the committed workflow drifts away from the documented Linux/Windows validation contract.

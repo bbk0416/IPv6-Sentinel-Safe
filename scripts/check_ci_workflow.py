@@ -33,6 +33,13 @@ REQUIRED_COMMANDS = [
     "docker run -d --name \"$container_name\"",
     "docker inspect --format='{{.State.Health.Status}}'",
 ]
+REQUIRED_WINDOWS_SNIPPETS = [
+    "validate-windows:",
+    "runs-on: windows-latest",
+    'python-version: "3.12"',
+    "Verify release ZIP hygiene",
+    "Verify CI workflow contract",
+]
 
 
 def check_workflow() -> dict[str, object]:
@@ -49,6 +56,9 @@ def check_workflow() -> dict[str, object]:
     for command in REQUIRED_COMMANDS:
         if command not in text:
             errors.append(f"missing CI command: {command}")
+    for snippet in REQUIRED_WINDOWS_SNIPPETS:
+        if snippet not in text:
+            errors.append(f"missing Windows CI requirement: {snippet}")
     lines = text.splitlines()
     for idx, line in enumerate(lines[:-1]):
         stripped = line.strip()
@@ -63,6 +73,7 @@ def check_workflow() -> dict[str, object]:
         "checked_actions": len(REQUIRED_ACTIONS),
         "forbidden_actions": len(FORBIDDEN_ACTIONS),
         "checked_commands": len(REQUIRED_COMMANDS),
+        "checked_windows_requirements": len(REQUIRED_WINDOWS_SNIPPETS),
     }
 
 

@@ -99,3 +99,27 @@ jobs:
           docker logs "$container_name"
           docker inspect "$container_name"
           exit 1
+
+  validate-windows:
+    runs-on: windows-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Check requirements manifest
+        run: python scripts/check_requirements.py
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Run clean validation
+        run: python scripts/run_clean_validation.py
+      - name: Run full unittest discovery
+        run: python scripts/run_full_tests.py
+      - name: Verify release ZIP hygiene
+        run: python scripts/check_release_zip.py
+      - name: Verify CI workflow contract
+        run: python scripts/check_ci_workflow.py
