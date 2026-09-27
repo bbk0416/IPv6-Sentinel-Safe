@@ -4,27 +4,37 @@
 
 IPv6 Sentinel Safe is a local-only IPv6 security-event simulator for portfolio and education demos. It intentionally disables real packet capture, packet sending, and active network scanning.
 
-## v27 focus
+## Current release scope
 
-The main v27 improvement is maintainability of the validation suite:
+The current release is complete for its stated simulator and reviewer-handoff scope:
 
-- `/api/gates` exposes the quality-gate registry.
-- `services/gate_registry.py` centralizes gate metadata.
-- `scripts/check_gate_registry.py` validates scripts, docs, manifest entries, and optional gate endpoints.
-- `docs/quality/GATE_REGISTRY.md` explains the gate and its limits.
+- Flask/Socket.IO dashboard with REST fallback controls
+- local sample IPv6 security-event scenarios
+- API, OpenAPI, schema, route, manifest, and release consistency checks
+- deterministic file inventory and release ZIP hygiene checks
+- publication, capability-boundary, and reviewer-handoff checks
+- Docker packaging and authenticated container health verification
+- GitHub Actions validation on Ubuntu and Windows
 
-## What is complete
+## Current validation baseline
 
-- Safe simulator boundary is explicit.
-- Flask/Socket.IO dashboard has REST fallback controls.
-- API, OpenAPI, manifest, schema, route, release, file inventory, publication, and gate-registry checks are present.
-- Docker, CI, validation scripts, and release ZIP hygiene checks are included.
+The canonical reviewer commands are:
 
-## What is not complete
+```bash
+python scripts/run_clean_validation.py
+python scripts/run_full_tests.py
+```
 
-This is not a production IPv6 detector. It does not inspect real DHCPv6, DNS, ND, or RA traffic and does not provide detection accuracy metrics.
+The full dependency-installed discovery baseline is **161 tests**. GitHub Actions validates Python 3.10, 3.11, and 3.12 on Ubuntu, plus Python 3.12 on Windows.
 
-## Honest score
+## What is not claimed
 
-- Portfolio / education simulator: around 95/100.
-- Actual security monitoring product: below 40/100.
+This is not a production IPv6 detector or IDS/IPS. It does not inspect real DHCPv6, DNS, Neighbor Discovery, or Router Advertisement traffic. It does not capture or transmit packets, actively scan networks, block traffic, or provide detection-accuracy metrics.
+
+## Completion assessment
+
+- Portfolio / education simulator: complete for the documented scope.
+- Release and reviewer handoff: covered by automated quality gates and CI.
+- Production IPv6 monitoring product: outside the project scope and not validated.
+
+No numerical product score is assigned because the repository does not define a measured scoring rubric for that comparison.
