@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 162,
-  "package_sha256": "97aa8ace282c9dad200698eda21b53fb891d94050b540c31b31c9af7c1a79d65",
+  "package_sha256": "755b371afe6c4d387f284c1fe6092e667a5730d3eb733d52134cccef0637cb83",
   "files": [
     {
       "path": ".dockerignore",
@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "size": 4003,
-      "sha256": "a0d0e939fbabd24a5269c6696c7f3fe61ed49ba605427f0fb66d8ff54374e6ee"
+      "size": 4822,
+      "sha256": "0b9eda53043d92e894504bf29c9ee12cbed4824bb217292f197f1ee5badc2e76"
     },
     {
       "path": ".gitignore",
@@ -69,13 +69,13 @@
     },
     {
       "path": "PROJECT_COMPLETION_REPORT.md",
-      "size": 1225,
-      "sha256": "b87a4d6b361525f01c371ad4abe255fc18f193f3cac8e835e219906971569398"
+      "size": 1766,
+      "sha256": "a0d297317d27f11e5dfb2d1226eb65212d6870f6538e4c3a84f6bc494c406349"
     },
     {
       "path": "README.md",
-      "size": 9130,
-      "sha256": "bae26727cf40f9401981cc30c7241decc5c8e9fd30935aa56f14353ca5c29ab1"
+      "size": 9310,
+      "sha256": "43c8e2d5a4f8a70f89395ab5784dd84ada4d5fdcbaf8bb2176411ee91d63c8f4"
     },
     {
       "path": "RELEASE_NOTES_v27.md",
@@ -99,8 +99,8 @@
     },
     {
       "path": "VALIDATION_REPORT.md",
-      "size": 48815,
-      "sha256": "d2f89d92d4db815ebfa5b861487e6d29fe1f092fffa1e5fa18e07de39e7989b7"
+      "size": 3255,
+      "sha256": "f5bb34ebc3ddd422a8b6c1efc71c8b69e49cff84f567466e7c46100226b8e62e"
     },
     {
       "path": "app.py",
@@ -174,8 +174,8 @@
     },
     {
       "path": "docs/quality/CI_WORKFLOW.md",
-      "size": 641,
-      "sha256": "b4c141431c226b200fb0fb70666e12a099004c7bf535af306673a57443e31f42"
+      "size": 1044,
+      "sha256": "58459e4aa4071507b3fe63da050ef485cb389731b920d020addda26a0bee6963"
     },
     {
       "path": "docs/quality/FILE_INVENTORY.md",
@@ -334,8 +334,8 @@
     },
     {
       "path": "scripts/check_ci_workflow.py",
-      "size": 2731,
-      "sha256": "16cf7a6add8a8393d5d78d66a366b47c868dfce2229076ca9e66c55a3f22f6d8"
+      "size": 3140,
+      "sha256": "1b03ea10ba79c33eaa0ebf816460f6e1743d083341cb460e5cbb9dc1bc2ffd10"
     },
     {
       "path": "scripts/check_file_inventory.py",
