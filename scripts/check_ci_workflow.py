@@ -9,12 +9,19 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "ci.yml"
 REQUIRED_ACTIONS = [
-    "actions/checkout@v7",
-    "actions/setup-python@v7",
+    "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
 ]
 FORBIDDEN_ACTIONS = [
     "actions/checkout@v4",
+    "actions/checkout@v7",
     "actions/setup-python@v5",
+    "actions/setup-python@v7",
+]
+REQUIRED_SECURITY_SNIPPETS = [
+    "permissions:",
+    "contents: read",
+    "persist-credentials: false",
 ]
 REQUIRED_COMMANDS = [
     "python scripts/check_requirements.py",
@@ -59,6 +66,11 @@ def check_workflow() -> dict[str, object]:
     for snippet in REQUIRED_WINDOWS_SNIPPETS:
         if snippet not in text:
             errors.append(f"missing Windows CI requirement: {snippet}")
+    for snippet in REQUIRED_SECURITY_SNIPPETS:
+        if snippet not in text:
+            errors.append(f"missing CI security requirement: {snippet}")
+    if text.count("persist-credentials: false") < 2:
+        errors.append("each checkout step must disable persisted credentials")
     lines = text.splitlines()
     for idx, line in enumerate(lines[:-1]):
         stripped = line.strip()
@@ -74,6 +86,7 @@ def check_workflow() -> dict[str, object]:
         "forbidden_actions": len(FORBIDDEN_ACTIONS),
         "checked_commands": len(REQUIRED_COMMANDS),
         "checked_windows_requirements": len(REQUIRED_WINDOWS_SNIPPETS),
+        "checked_security_requirements": len(REQUIRED_SECURITY_SNIPPETS),
     }
 
 

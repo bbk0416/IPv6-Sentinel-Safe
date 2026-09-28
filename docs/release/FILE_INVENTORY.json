@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 162,
-  "package_sha256": "c841c101b3e4813cbca765ae61fbf59137b6ac24fde48f5cc867a0d8db51a832",
+  "package_sha256": "4e9e068eb76f9627da7fb58daabd424de09be73fddadade10d11e1963aa9dc80",
   "files": [
     {
       "path": ".dockerignore",
@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "size": 4822,
-      "sha256": "0b9eda53043d92e894504bf29c9ee12cbed4824bb217292f197f1ee5badc2e76"
+      "size": 5127,
+      "sha256": "d99d8d7e8b3f3f4cf3d819b6af923bd3d1d73ac26d693f50cf80ad223dc6033f"
     },
     {
       "path": ".gitignore",
@@ -174,8 +174,8 @@
     },
     {
       "path": "docs/quality/CI_WORKFLOW.md",
-      "size": 1044,
-      "sha256": "58459e4aa4071507b3fe63da050ef485cb389731b920d020addda26a0bee6963"
+      "size": 1372,
+      "sha256": "5bf955619e6dd9b554b881c24106b558886ea9a9cfaafb985ee148965fd3f83e"
     },
     {
       "path": "docs/quality/FILE_INVENTORY.md",
@@ -334,8 +334,8 @@
     },
     {
       "path": "scripts/check_ci_workflow.py",
-      "size": 3140,
-      "sha256": "1b03ea10ba79c33eaa0ebf816460f6e1743d083341cb460e5cbb9dc1bc2ffd10"
+      "size": 3741,
+      "sha256": "de89d94b71cc9aaef58b602dfeaae809506d295bce8273585b1365eaac76b558"
     },
     {
       "path": "scripts/check_file_inventory.py",
