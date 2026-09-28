@@ -19,7 +19,7 @@
 
 ## 릴리스 상태
 
-공개 Release `v27.0.0-safe`와 배포 ZIP은 **commit `8821e070`에 고정된 공개 스냅샷**입니다. 현재 `main`은 그 릴리스 이후의 문서·CI 유지보수 변경을 포함합니다. 기존 태그나 ZIP은 재작성하지 않으며, 현재 `main`의 검증 근거는 GitHub Actions와 `docs/release/FILE_INVENTORY.json`을 기준으로 확인합니다.
+공개 Release safe release ID `27.0.0-safe`와 배포 ZIP은 **commit `8821e070`에 고정된 공개 스냅샷**입니다. 현재 `main`은 그 릴리스 이후의 문서·CI 유지보수 변경을 포함합니다. 기존 태그나 ZIP은 재작성하지 않으며, 현재 `main`의 검증 근거는 GitHub Actions와 `docs/release/FILE_INVENTORY.json`을 기준으로 확인합니다.
 
 ## 이 프로젝트의 목적
 
