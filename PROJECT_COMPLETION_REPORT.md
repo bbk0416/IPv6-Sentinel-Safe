@@ -6,7 +6,7 @@ IPv6 Sentinel Safe is a local-only IPv6 security-event simulator for portfolio a
 
 ## Release provenance
 
-The published GitHub Release `v27.0.0-safe` is frozen at commit `8821e070`. The current `main` branch contains post-release documentation and CI maintenance. The existing release tag and ZIP are intentionally not rewritten; current-main integrity is represented by the repository CI result and deterministic file inventory.
+The published GitHub Release safe release ID `27.0.0-safe` is frozen at commit `8821e070`. The current `main` branch contains post-release documentation and CI maintenance. The existing release tag and ZIP are intentionally not rewritten; current-main integrity is represented by the repository CI result and deterministic file inventory.
 
 ## Current release scope
 
