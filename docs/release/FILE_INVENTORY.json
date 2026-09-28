@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 162,
-  "package_sha256": "f24c185d985c5b16ad45efae5564c722a011b3ddd558193a0d87fc08563751a2",
+  "package_sha256": "c841c101b3e4813cbca765ae61fbf59137b6ac24fde48f5cc867a0d8db51a832",
   "files": [
     {
       "path": ".dockerignore",
@@ -54,8 +54,8 @@
     },
     {
       "path": "LICENSE",
-      "size": 990,
-      "sha256": "becf7f0288451037633997e65e634d81aeb026c54fb015d041ac594fc74c6bf2"
+      "size": 998,
+      "sha256": "0000dccf175ac8c0eb46a59e50bef4eb818e6cd6acd69ae1e69c3ebca4ef46e9"
     },
     {
       "path": "Makefile",
