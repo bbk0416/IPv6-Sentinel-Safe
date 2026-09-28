@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 162,
-  "package_sha256": "76f5e7c072248f017df0eed9b4abb0b53e60345e00f6241079a902e3f0574214",
+  "package_sha256": "f24c185d985c5b16ad45efae5564c722a011b3ddd558193a0d87fc08563751a2",
   "files": [
     {
       "path": ".dockerignore",
@@ -774,8 +774,8 @@
     },
     {
       "path": "tests/test_v23_validation_hygiene.py",
-      "size": 11775,
-      "sha256": "53191e1c400f42e56a720f0ca2561a3824df7e7628afc2ee71c4162231f65762"
+      "size": 11191,
+      "sha256": "287c8262d9ec7ea69bdf250bed23b0c2af820498d64790693bd20afe93bc8eea"
     },
     {
       "path": "tests/test_v27_capability_boundary.py",
