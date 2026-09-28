@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 162,
-  "package_sha256": "53ef84d08e8750ad1f77f8327b36b7d01d9012033a4f30a979ff86c397e4fa48",
+  "package_sha256": "f24c185d985c5b16ad45efae5564c722a011b3ddd558193a0d87fc08563751a2",
   "files": [
     {
       "path": ".dockerignore",
@@ -64,8 +64,8 @@
     },
     {
       "path": "PORTFOLIO_SUMMARY.md",
-      "size": 1458,
-      "sha256": "a15f6dc654f4b50b7ffd277b1a663a8920d9a6c06165c196dd66d7ec17754cf2"
+      "size": 1459,
+      "sha256": "2de1b3053af2ef79cc46c1199754ef073f4883f9a4dfad69e46dcb1aded2ea55"
     },
     {
       "path": "PROJECT_COMPLETION_REPORT.md",
@@ -79,8 +79,8 @@
     },
     {
       "path": "RELEASE_NOTES_v27.md",
-      "size": 37986,
-      "sha256": "bb1fd8033ae39ced0a358f5e977f872825d4df5029c2e9f3d998e44c9ac5e33f"
+      "size": 2026,
+      "sha256": "54468d302ca702ff896af80224f89893150f507d440dcbe2c3aaa218932792b1"
     },
     {
       "path": "SAFE_PATCH_NOTES.md",
@@ -774,8 +774,8 @@
     },
     {
       "path": "tests/test_v23_validation_hygiene.py",
-      "size": 11775,
-      "sha256": "53191e1c400f42e56a720f0ca2561a3824df7e7628afc2ee71c4162231f65762"
+      "size": 11191,
+      "sha256": "287c8262d9ec7ea69bdf250bed23b0c2af820498d64790693bd20afe93bc8eea"
     },
     {
       "path": "tests/test_v27_capability_boundary.py",
