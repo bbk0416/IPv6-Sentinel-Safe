@@ -17,6 +17,10 @@
 | 검증 상태 | GitHub Actions에서 Ubuntu(Python 3.10–3.12)와 Windows(Python 3.12) 검증 |
 | 안전 범위 | 실제 패킷 캡처 없음, 실제 패킷 전송 없음, 실제 네트워크 스캔 없음 |
 
+## 릴리스 상태
+
+공개 Release `v27.0.0-safe`와 배포 ZIP은 **commit `8821e070`에 고정된 공개 스냅샷**입니다. 현재 `main`은 그 릴리스 이후의 문서·CI 유지보수 변경을 포함합니다. 기존 태그나 ZIP은 재작성하지 않으며, 현재 `main`의 검증 근거는 GitHub Actions와 `docs/release/FILE_INVENTORY.json`을 기준으로 확인합니다.
+
 ## 이 프로젝트의 목적
 
 이 프로젝트는 “실제 공격/탐지 도구”가 아니라, **보안 이벤트 대응 흐름을 안전하게 보여주는 데모 환경**입니다.
