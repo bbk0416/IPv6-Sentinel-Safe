@@ -4,8 +4,8 @@
   "mode": "safe_simulation",
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
-  "file_count": 162,
-  "package_sha256": "4e9e068eb76f9627da7fb58daabd424de09be73fddadade10d11e1963aa9dc80",
+  "file_count": 161,
+  "package_sha256": "246c2fe592972598f796a1ead033b8c53d30076b7331bcf477fde9468f8361d3",
   "files": [
     {
       "path": ".dockerignore",
@@ -34,8 +34,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "size": 1313,
-      "sha256": "c67f47f1c4ae34b0c25ffee26d59e917ce5a2de3f74fd5c26208eb6031cb322e"
+      "size": 1322,
+      "sha256": "a90f1a69e7de0ad21af7d52f83258b3c0f6a78ecb920cd53204d35a4c160b9b0"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -81,11 +81,6 @@
       "path": "RELEASE_NOTES_v27.md",
       "size": 2026,
       "sha256": "54468d302ca702ff896af80224f89893150f507d440dcbe2c3aaa218932792b1"
-    },
-    {
-      "path": "SAFE_PATCH_NOTES.md",
-      "size": 901,
-      "sha256": "d4cb40de37b568807d792595b04c686085a04124c05565112b9d63e74f1fb137"
     },
     {
       "path": "SECURITY.md",
