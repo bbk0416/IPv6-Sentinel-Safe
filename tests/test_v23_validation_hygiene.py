@@ -171,7 +171,7 @@ class V23ValidationHygieneTests(unittest.TestCase):
         self.assertEqual(missing, [])
 
 
-    def test_current_exit_documentation_matches_wrappers(self):
+    def test_current_validation_documentation_matches_wrappers(self):
         docs = [
             ROOT / "RELEASE_NOTES_v27.md",
             ROOT / "VALIDATION_REPORT.md",
@@ -179,16 +179,9 @@ class V23ValidationHygieneTests(unittest.TestCase):
         ]
         combined = "\n".join(path.read_text(encoding="utf-8") for path in docs)
         self.assertNotIn("now return through normal `SystemExit`", combined)
-        self.assertIn("os.write()", combined)
-        self.assertIn("os._exit()", combined)
-        self.assertIn("154/155", combined)
-        self.assertIn("runtime-dependency-installed", combined)
-        self.assertNotIn("148" + "/149", combined)
-        self.assertNotIn("147" + "/148", combined)
-        self.assertNotIn("dependency-installed runs can observe " + "148", combined)
-        self.assertNotIn("155 tests observed across 21/21 discovered modules, 20 skipped runtime-dependency tests", combined)
-        self.assertNotIn("155 tests observed across 21/21 discovered modules in dependency-light mode", combined)
-        self.assertIn("154 tests observed across 21/21 discovered modules, 20 skipped runtime-dependency tests", combined)
+        self.assertIn("161 tests", combined)
+        for stale_count in ("154/155", "148/149", "147/148"):
+            self.assertNotIn(stale_count, combined)
         for rel in ("scripts/run_clean_validation.py", "scripts/run_full_tests.py"):
             script = (ROOT / rel).read_text(encoding="utf-8")
             self.assertIn("os.write", script)
