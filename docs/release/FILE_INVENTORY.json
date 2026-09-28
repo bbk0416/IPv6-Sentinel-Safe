@@ -5,7 +5,7 @@
   "generated_by": "scripts/check_file_inventory.py --write",
   "note": "Deterministic file inventory excluding generated caches, runtime data, ZIP files, and this inventory file. Text files are hashed with LF-normalized line endings for stable fresh-clone validation across Windows/macOS/Linux.",
   "file_count": 162,
-  "package_sha256": "755b371afe6c4d387f284c1fe6092e667a5730d3eb733d52134cccef0637cb83",
+  "package_sha256": "809e6aeec2d0153cab9259fa952c66671746e5f47dba6280fc77d4667563941a",
   "files": [
     {
       "path": ".dockerignore",
@@ -69,13 +69,13 @@
     },
     {
       "path": "PROJECT_COMPLETION_REPORT.md",
-      "size": 1766,
-      "sha256": "a0d297317d27f11e5dfb2d1226eb65212d6870f6538e4c3a84f6bc494c406349"
+      "size": 2114,
+      "sha256": "0aacf96d1b2ec27ec6c8bcfdd116f974d351b25685ce1fa229e51b55395c5982"
     },
     {
       "path": "README.md",
-      "size": 9310,
-      "sha256": "43c8e2d5a4f8a70f89395ab5784dd84ada4d5fdcbaf8bb2176411ee91d63c8f4"
+      "size": 9704,
+      "sha256": "295f8d011b8773df144cd1be512e6193dab9c074fb88bb26fddce56c4c08bb70"
     },
     {
       "path": "RELEASE_NOTES_v27.md",
@@ -99,8 +99,8 @@
     },
     {
       "path": "VALIDATION_REPORT.md",
-      "size": 3255,
-      "sha256": "f5bb34ebc3ddd422a8b6c1efc71c8b69e49cff84f567466e7c46100226b8e62e"
+      "size": 3625,
+      "sha256": "1a99847b360d60df5704eb834ec5643c8a53334e1a7b55a3d606ad5f398cfce0"
     },
     {
       "path": "app.py",
