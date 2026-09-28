@@ -6,6 +6,10 @@ This report is the current validation summary for IPv6 Sentinel Safe. It covers 
 
 It does **not** validate real IPv6 traffic detection, packet capture, packet transmission, active network scanning, IDS/IPS effectiveness, or production monitoring accuracy.
 
+## Release provenance
+
+The published `v27.0.0-safe` tag and release ZIP remain fixed at commit `8821e070`. This report describes the newer `main` branch after post-release documentation and CI maintenance. The historical release artifact is not silently replaced or retagged; current-main validation is evidenced by the current CI run and deterministic file inventory.
+
 ## Canonical validation
 
 Run the repository's primary validation command first:
